@@ -1,0 +1,337 @@
+% February 3, 2014 (Monday, 07:10 PST) rjbw
+
+\usepackage{theorem}
+\usepackage{array}
+\usepackage[reqno]{amsmath}
+% \usepackage{latexsym}
+\usepackage{enumerate}
+% \usepackage{showidx}
+\usepackage{fancybox}
+\usepackage{color}
+%\input epsf.sty
+% \usepackage{epsfig}
+% \usepackage{graphicx,color}
+%\usepackage[final]{graphics}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{svg}
+
+
+%\newcommand{\drawing}[4]{
+%	\begin{figure}[!hbt]
+%	\begin{center}
+%	\leavevmode
+%	\epsfxsize=#2
+%	\epsfbox{#1}
+%	\caption{\small #3}
+%	\label{#4}
+%	\end{center}
+%	\end{figure}}
+
+% the proclaim commands
+\theoremstyle{change}
+\newtheorem{proclaim}{PROCLAIM}[section]
+\newtheorem{theorem}[proclaim]{Theorem}
+\newtheorem{definition}[proclaim]{Definition}
+\newtheorem{lemma}[proclaim]{Lemma}
+\newtheorem{proposition}[proclaim]{Proposition}
+\newtheorem{corollary}[proclaim]{Corollary}
+\newtheorem{example}[proclaim]{Example}
+\newtheorem{exercise}[proclaim]{Exercise}
+\newtheorem{convergence}[proclaim]{Convergence}
+\newtheorem{algorithm}[proclaim]{Algorithm}
+\newtheorem{assumption}[proclaim]{Assumption}
+
+\newcommand{\rwlabel}[1]{\label{#1}}% \marginpar{#1}}
+
+% numbering of equations
+% \numberwithin{equation}{section}
+
+% \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%formatting
+% \newcommand{\beginsection}[1]{\bigskip\noindent{\bf #1}
+%                   \medskip\vskip0pt\noindent\hskip0pt}
+\outer\def\proclaim #1. #2\par{\medbreak \noindent{\bf#1.\enspace}{\sl#2}\par
+  \ifdim\lastskip<\medskipamount
+  \removelastskip\penalty55\medskip\fi}
+\def\state #1. { \noindent{\bf#1.\enspace}}
+
+% \newcommand{\eqns}[1]{\begin{eqnarray} #1 \end{eqnarray*}}
+% \def\eqalign#1{\begin{array}{lcr} #1 \end{array}}
+% \newcommand{\newpage}{\vfill\eject}
+\newcommand{\newpar}{\vskip0cm\indent}
+% \newcommand{\newline}{\vskip0cm\noindent}
+\newcommand{\head}[1]{\nopagenumbers\centerline{\bf #1}\bigskip}
+\newcommand{\headskip}[1]{\null\vskip#1}
+\newcommand{\paritem}[1]{\vskip0cm\noindent\hskip12pt{{\rm #1}}\hskip5pt}
+\newcommand{\bigbar}{\vskip8pt\centerline{\hrulefill}\vskip8pt}
+\newcommand{\rwtxt}[1]{\,\;\hbox{#1}\;\,}
+\newcommand{\Text}[1]{\,\quad\hbox{#1}\quad\,}
+\newcommand{\iitem}[2]{\everypar{\hangafter=1 \hangindent=16pt} 
+  \par\noindent\hskip8pt{#1}\hskip4pt #2 \everypar{\hangafter=0}}
+\newcommand{\n}[2]{\par\noindent{\hangindent=25pt{\bf#1}\qd#2
+     \par}\smallskip}
+\newcommand{\nn}[2]{\par\noindent{\leftskip=15pt\hangindent=25pt{\bf#1}\qd#2
+     \par}\smallskip}
+
+%clusters
+\newcommand{\aff}{aff}
+%\newcommand{\argmax}{{\rm argmax}}
+\newcommand{\argmaxinf}{{\rm argmaxinf}}
+\newcommand{\argmin}{{\rm argmin}}
+\newcommand{\minimax}{minimax}
+\newcommand{\cl}{cl}
+\newcommand{\bdry}{bdry}
+\newcommand{\con}{con}
+\newcommand{\diag}{diag}
+\newcommand{\dist}{dist}
+%%%%%%%%%%%%%%%%%%%%%%% jd
+\newcommand{\dom}{{\rm dom}}
+%%%%%%%%%%%%%%%%%%%%%%% jd
+\newcommand{\epi}{{\rm epi}}
+\newcommand{\hypo}{{\rm hypo}}
+\newcommand{\nt}{int}
+\newcommand{\lev}{lev}
+\newcommand{\pol}{pol}
+\newcommand{\pos}{pos}
+\newcommand{\prj}{prj}
+\newcommand{\rank}{rank}
+\newcommand{\rge}{rge}
+\newcommand{\fcns}{fcns}
+\newcommand{\acfcns}{ac-fcns}
+\newcommand{\pcfcns}{pc-fcns}
+\newcommand{\lscfcns}{\mathop{\textrm{lsc-fcns}}}
+\newcommand{\prlscfcns}{\mathop{\textrm{prlsc-fcns}}}
+\newcommand{\uscfcns}{\mathop{\textrm{usc-fcns}}}
+\newcommand{\dns}{\mathop{\textrm{dns-fcns}}}
+\newcommand{\clsupp}{{\overline{\rm supp \,}}}
+\newcommand{\supp}{{\rm supp}}
+
+
+\newcommand{\comp}{\,{\raise 1pt \hbox{$\scriptstyle\circ$}}\,}
+\newcommand{\eqhyph}{\hbox{\rm -}}
+
+%other symbols
+\newcommand{\reals}{{I\kern-.35em R}}
+\newcommand{\Reals}{\overline{I\kern-.35em R}}
+\newcommand{\natnums}{{{\rm l} \kern -.13em {\rm N} }}
+\newcommand{\nats}{{I\kern -.35em N}}
+\newcommand{\snats}{{I\kern -.29em N}}
+\newcommand{\rats}{{Q\kern -.64em \raise 1pt \hbox{$\scriptstyle |$}\;\,}}
+\newcommand{\srats}
+	{{Q\kern -.56em \raise 1.2pt \hbox{$\scriptscriptstyle /$}\,}}
+\newcommand{\ints}{Z\kern -.46em Z}
+\newcommand{\ball}{{I\kern -.35em B}}
+\newcommand{\pluss}{\hskip1pt \raise1pt\vbox{\hrule width6pt \vskip1pt \hrule
+                    width6pt} \kern-4pt{\lower1pt\hbox{\vrule height6pt
+		    \kern1pt\vrule height6pt}}\hskip5pt}
+\newcommand{\eop}
+	{\hfill{$\vcenter{\hrule height1pt \hbox{\vrule width1pt height5pt 
+   	 \kern5pt \vrule width1pt} \hrule height1pt}$} \medskip}
+\newcommand{\half}
+	{{\raisebox{1pt}{$\frac{1}{2}$}}}
+\newcommand{\linfty}{{\scriptscriptstyle \infty}}
+\newcommand{\lminus}{{\scriptscriptstyle -}}
+\newcommand{\lplus}{{\scriptscriptstyle +}}
+\newcommand{\lT}{{\scriptscriptstyle T}}
+\newcommand{\mvert}{{\,\big\vert\,}}
+\newcommand{\bull}{\hbox{$\,\bullet\,$}}
+\newcommand{\setd}{{ d \kern -.15em l}} 
+\newcommand{\hatsetd}{ d \hat{\kern -.15em l }}
+
+%greek symbols
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+
+% delimiters
+\newcommand{\lset}{\big\lbrace}
+\newcommand{\mset}{{\,\big\vert\,}}
+\newcommand{\rset}{\big\rbrace}
+\newcommand{\Lset}{\Big\lbrace}
+\newcommand{\Mset}{{\,\Big\vert\,}}
+\newcommand{\Rset}{\Big\rbrace}
+\newcommand{\Langle}{\Big\langle}
+\newcommand{\Rangle}{\Big\rangle}
+\newcommand{\Leq}{\;\leq\;}
+\newcommand{\Geq}{\;\geq\;}
+
+%miscellaneous hyphenation
+\hyphenation{sto-chast-ic}
+\hyphenation{semi-def-i-nite}
+\hyphenation{La-gran-gi-an}
+\hyphenation{non-smooth}
+\hyphenation{sub-diffe-ren-tial}
+
+% Arrows:
+\newcommand{\tto}{\;{\lower 1pt \hbox{$\rightarrow$}}\kern -12pt
+           \hbox{\raise 2.5pt \hbox{$\rightarrow$}}\;}
+\newcommand{\overto}[1]{\,{\raise 0pt\hbox{$\rightarrow$}}\kern -9pt
+     \hbox{\lower 3pt \hbox{$\scriptscriptstyle#1$}}\hskip6pt}
+\newcommand{\underto}[1]{\,{\lower 1pt\hbox{$\rightarrow$}}\kern -9pt
+     \hbox{\raise 4pt \hbox{$\,\scriptscriptstyle#1$}}\hskip7pt}
+\newcommand{\bigoverto}[1]{{\raise 0pt\hbox{$\,\longrightarrow$}}\kern -16pt
+     \hbox{\lower 3pt \hbox{$\scriptscriptstyle#1$}}\hskip4pt}
+\newcommand{\bigunderto}[1]{\,{\lower 1pt\hbox{$\longrightarrow$}}\kern -16pt
+     \hbox{\raise 4pt \hbox{$\,\scriptscriptstyle#1$}}\hskip6pt}
+\newcommand{\bigbigto}[2]{\,{\raise 0pt\hbox{$\,\longrightarrow$}}\kern -16pt
+     \hbox{\lower 3pt \hbox{$\scriptscriptstyle#2$}}\kern -10pt
+     \hbox{\raise 4pt \hbox{$\,\scriptscriptstyle#1$}}\hskip7pt}
+\newcommand{\downto}{{\raise 1pt \hbox{$\scriptstyle \,\searrow\,$}}}
+\newcommand{\upto}{{\raise 1pt \hbox{$\scriptstyle \,\nearrow\,$}}}
+\newcommand{\imply}{\quad\hbox{$\Longrightarrow$}\quad}
+% \newcommand{\implies}{\quad\hbox{$\Longrightarrow$}\quad}
+\newcommand{\implied}{\quad\hbox{$\Longleftarrow$}\quad}
+\newcommand{\notimply}
+	{\quad\hbox{$\Longrightarrow \kern -14pt {/}$}\hskip6pt\quad}
+% \newcommand{\iff}{\quad\hbox{$\Longleftrightarrow$}\quad}
+\newcommand{\rightrightarrows}{\,{{\lower4pt\hbox{$\scriptstyle\rightarrow$}}
+    \atop{\raise8pt\hbox{$\scriptstyle\rightarrow$}}}\,} %supplanted by \tto
+
+% \def\hypolim{\mathop{\h\vlim}}
+\def\eto{\,{\lower 1pt\hbox{$\rightarrow$}}\kern -11pt
+     \hbox{\raise 4pt \hbox{$\, \scriptstyle e$}}\hskip7pt}
+\def\hto{\,{\lower 1pt\hbox{$\rightarrow$}}\kern -11pt
+     \hbox{\raise 4pt \hbox{$\, \scriptstyle h$}}\hskip7pt}
+\def\gto{\,{\lower 1pt\hbox{$\rightarrow$}}\kern -11pt
+     \hbox{\raise 4.5pt \hbox{$\, \scriptstyle g$}}\hskip7pt}
+\def\pto{\,{\lower 1pt\hbox{$\rightarrow$}}\kern -11pt
+     \hbox{\raise 4.5pt \hbox{$\, \scriptstyle p$}}\hskip7pt}
+\def\cto{\,{\lower 1pt\hbox{$\rightarrow$}}\kern -11pt
+      \hbox{\raise 4pt \hbox{$\, \scriptstyle c$}}\hskip7pt}
+\newcommand{\awto}{\,{\lower 1pt\hbox{$\longrightarrow$}}\kern -16pt
+     \hbox{\raise 4pt \hbox{$\,\scriptstyle aw$}}\hskip6pt}
+
+% vertical adjustments:
+% \newcommand{\substack}[2]{{\scriptstyle{#1}\atop\scriptstyle{#2}}}
+\newcommand{\subsubstack}[3]{ {{\scriptstyle{#1}}\atop{ \scriptstyle{#2}}}
+                   \atop{\scriptstyle{#3}} }
+\newcommand{\vinf}{\mathop{\smash\inf\vphantom\sup}}
+\newcommand{\vlim}{\mathop{\smash\lim\vphantom\sup}}
+\newcommand{\vliminf}{\mathop{\smash\liminf\vphantom\limsup}}
+\newcommand{\vmax}{\mathop{\smash\max\vphantom\sup}}
+\newcommand{\vmin}{\mathop{\smash\min\vphantom\sup}}
+\newcommand{\vsup}{\mathop{\smash\sup\vphantom\sup}}
+\newcommand{\low}[1]{{\lower1pt \hbox{$\scriptstyle #1$}}}
+\newcommand{\loww}[1]{{\lower2pt \hbox{$\scriptstyle #1$}}}
+\newcommand{\high}[1]{{\raise1pt \hbox{$\scriptstyle #1$}}}
+
+% Script capitals:
+\newcommand{\cA}{{\cal A}}
+\newcommand{\cB}{{\cal B}}
+\newcommand{\cC}{{\cal C}}
+\newcommand{\cD}{{\cal D}}
+\newcommand{\cE}{{\cal E}}
+\newcommand{\cF}{{\cal F}}
+\newcommand{\cG}{{\cal G}}
+\newcommand{\cH}{{\cal H}}
+\newcommand{\cI}{{\cal I}}
+\newcommand{\cJ}{{\cal J}}
+\newcommand{\cK}{{\cal K}}
+\newcommand{\cL}{{\cal L}}
+\newcommand{\cM}{{\cal M}}
+\newcommand{\cN}{{\cal N}}
+\newcommand{\cO}{{\cal O}}
+\newcommand{\cP}{{\cal P}}
+\newcommand{\cQ}{{\cal Q}}
+\newcommand{\cR}{{\cal R}}
+\newcommand{\cS}{{\cal S}}
+\newcommand{\cT}{{\cal T}}
+\newcommand{\cU}{{\cal U}}
+\newcommand{\cW}{{\cal W}}
+\newcommand{\cX}{{\cal X}}
+\newcommand{\cY}{{\cal Y}}
+\newcommand{\cZ}{{\cal Z}}
+
+% broadened marks
+% \newcommand{\Bar}{\overline}
+% \newcommand{\Hat}{\widehat} 
+% \newcommand{\Tilde}{\widetilde}
+
+%big union, intersection
+\let\Cup=\bigcup
+\let\Cap=\bigcap
+
+% sum-limits without limits
+\newcommand{\nsum}{\mathop{\sum}\nolimits}
+\newcommand{\nprod}{\mathop{\prod}\nolimits}
+\newcommand{\nlim}{\mathop{\rm lim}\nolimits}
+\newcommand{\nliminf}{\mathop{\rm liminf}\nolimits}
+\newcommand{\nlimsup}{\mathop{\rm limsup}\nolimits}
+\newcommand{\ninf}{\mathop{\rm inf}\nolimits}
+\newcommand{\nsup}{\mathop{\rm sup}\nolimits}
+\newcommand{\nmax}{\mathop{\rm max}\nolimits}
+\newcommand{\nmin}{\mathop{\rm argmin}\nolimits}
+\newcommand{\nargmax}{\mathop{\rm argmax}\nolimits}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\newcommand{\nargmin}{\mathop{\rm argmin}\nolimits}
+
+% Derivatives:
+\newcommand{\der}{{\hbox{\sl d}}\hskip.5pt}
+\newcommand{\dersq}{{\hbox{\sl d}}\hskip.5pt^2\hskip-1.1pt}
+\newcommand{\coder}{\partial}
+\newcommand{\subg}{\partial}
+% \newcommand{\rder}{\kern 3pt \hbox{$\Hat{\hbox{\kern -3pt \sl d}}$}}
+% \newcommand{\lrder}{\kern 1pt \hbox{$\Hat{\hbox{\kern -1pt \sl d}}$}}  %for book notes
+% \newcommand{\rcoder}{\Hat\partial} \newcommand{\rhcoder{\Hat\partial^{\raise
+%                              1pt\hbox{$\scriptscriptstyle\infty$}}\!}
+
+%probabilistic clusters
+\newcommand{\diffsn}{\mathop{\sl diffsn}\nolimits}
+\newcommand{\revert}{\mathop{\sl revert}\nolimits}
+\newcommand{\cov}{{\mathop{\rm cov}\nolimits}}
+\newcommand{\var}{{\mathop{\rm var}\nolimits}}
+\newcommand{\prob}{{\mathop{\rm prob}\nolimits}}
+
+% mathematical boldface
+\newcommand{\bfxi}{\mbox{\boldmath $\xi$}}
+\newcommand{\bfeta}{\mbox{\boldmath $\eta$}}
+\newcommand{\bfzeta}{\mbox{\boldmath $\zeta$}}
+\newcommand{\bfrho}{\mbox{\boldmath $\rho$}}
+\newcommand{\bfgamma}{\mbox{\boldmath $\gamma$}}
+\newcommand{\bfphi}{\mbox{\boldmath $\phi$}}
+\newcommand{\bfbeta}{\mbox{\boldmath $\beta$}}
+\newcommand{\bfGamma}{\mbox{\boldmath $\Gamma$}}
+
+\newcommand{\bfT}{\mbox{\boldmath $T$}}
+\newcommand{\bfB}{\mbox{\boldmath $B$}}
+\newcommand{\bft}{\mbox{\boldmath $t$}}
+\newcommand{\bfd}{\mbox{\boldmath $d$}}
+\newcommand{\bfy}{\mbox{\boldmath $y$}}
+\newcommand{\bfr}{\mbox{\boldmath $r$}}
+\newcommand{\bfs}{\mbox{\boldmath $s$}}
+\newcommand{\bfz}{\mbox{\boldmath $z$}}
+\newcommand{\bfv}{\mbox{\boldmath $v$}}
+\newcommand{\bfG}{\mbox{\boldmath $G$}}
+
+% new, germane to STO.PROG.
+\newcommand{\sothat}{\mathop{\rm so\;\, that\;}\nolimits}
+\newcommand{\suchthat}{\mathop{\rm \;such\; that\;}\nolimits}
+
+\newcommand{\lwdy}[2]{\mathrel{\mathop
+        {\raisebox{0.1ex}{\null$#1$}}{\hbox{\kern -1.0em
+	{\raisebox{-0.8ex}{$\scriptstyle{\;\to #2}$}}}}}}
+\newcommand{\lwwdy}[2]{\mathrel{\mathop
+        {\raisebox{0.2ex}{\null$#1$}}{\hbox{\kern -1.0em
+	{\raisebox{-1.1ex}{$\scriptstyle{\;\to #2}$}}}}}}
+\newcommand{\slwwdy}[2]{\scriptsize{{\mathrel{\mathop
+        {\raisebox{0.2ex}{\null$#1$}}{\hbox{\kern -1.0em
+	{\raisebox{-1.1ex}{$\scriptstyle{\;\to #2}$}}}}}}}}
+\newcommand{\cc}{\!:}
+\newcommand{\ts}{\thinspace}
+
+\newcommand{\as}{\rm a.s.}
+\newcommand{\SC}{\mathop{\rm SC}\nolimits}
+\newcommand{\Ex}{{I\kern-.35em E}}
+\newcommand{\Pro}{{I\kern-.35em P}}
+
+\newcommand{\espl}{\textup{\textrm{e-spl}}}
+\newcommand{\xspl}{\textup{\textrm{x-spl}}}
+
+\usepackage{mathrsfs}
+\newcommand{\rsM}{{\mathscr M}}
+\newcommand{\rsX}{{\mathscr X}}
+\newcommand{\rsF}{{\mathscr F}}
+\newcommand{\rsG}{{\mathscr G}}
+\newcommand{\rsA}{{\mathscr A}}
+\newcommand{\rsP}{{\mathscr P}}
