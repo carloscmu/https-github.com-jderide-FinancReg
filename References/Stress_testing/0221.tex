@@ -1,0 +1,28 @@
+\section{Wed, Feb 21st}
+Continuing the idea of a (benevolent) central planner, let's define the following modified utility functions for each agents:
+\[\tilde{\pi}_i=\begin{cases} \pi_i&{\rm institution}\,i\,{\rm operates\,normally}\\
+0&{\rm institution\,is\,on\,distress}\end{cases}\]
+Therefore, we expect that the Central Planner solves the following problem
+\[\max_x\Lset \Ex^p\Lset\sum_i \tilde\pi_i(x_i)\Rset -\frac{\mu}{2}{\rm Var}^p\left(\sum_i \tilde\pi_i(x_i)\right)-\frac{\theta}{2}{\rm Var}_\alpha\Ex\left(\sum_i \tilde\pi_i(x_i)\right)\Rset\]
+
+Additionally, we modify the assumptions over the spread of the distress condition
+
+\begin{assumption}{\rm (initial shocks)}\label{assinit}
+Initial shock only affects one institution (node)
+\end{assumption} 
+
+\begin{assumption}{\rm (propagation)}\label{assprop}
+Propagation occurs over simple paths
+\end{assumption} 
+
+Under Assumptions~(\ref{assinit},\ref{assprop}), one can formulates the probaility of distress of node $k$, $\Pro\{D_k\}$, by a simple recursion given by
+\begin{eqnarray*}
+\Pro_{j|i}&=&\Pro\{D_j|D_i\}\\
+&=&\Pro\{r_j(1-\epsilon_j)<\lambda|D_i\}\\
+&=&\Pro\{r_j(1-p\epsilon_i)<\lambda|D_i\}\\
+&=&1-F_{\epsilon_i}^{-1}\left(\frac{1}{p}\left(1-\frac{\lambda}{r_j}\right)\right)
+\end{eqnarray*}
+where $F_{\epsilon_i}^{-1}$ corresponds to the inverse cdf of $\epsilon_i$.  Finally, for every institution (node) of the network, the contagion will depend only on all the possible simple paths connecting the corresponding node and the initially infested \jd{?}. Therefore,
+\begin{equation}
+\Pro\{D_k\}=\sum_{l\to k} \Pro\{D_k|D_l\}\cdot\Pro\{D_l\}
+\end{equation}

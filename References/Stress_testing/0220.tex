@@ -9,7 +9,7 @@ We explore a model with the following features
 \item[3.] There is a central decision maker, focus on the stability of the system.  We discussed the information that is available to this regulator, and propose a mechanism to oversee the overall stability within the financial network thorugh a constraint over the ratio, given by $x_i$.
 
 \item[4.]  The financial institutions decide their ratio by maximizing their profits\footnote{utility?}, given by a function $\pi_i$, with the minimum level of A/L ratio, i.e.,
-\[r_i(x_i)\in\argmax_r\lset \pi(r)\mset r\geq x_i,\,r\in R_i\rset\]
+\[r_i(x_i)\in\argmax_r\lset \Ex^p\{ \pi(r)\}\mset r\geq x_i,\,r\in R_i\rset\]
 Additionally, assuming that the function $\pi_i$ is nondecreasing on $r$ (and no further restrictions are imposed), the individual solution to this problem is given by $r_i^*=x_i$, i.e., the financial institution sets its ratio at minimum possible level.
 
 \item[5.] There is contagion on the network, described in its stationary state as follows: if institution $i$ gets distressed, there is a probability $p$ that it affects its immediate neighbor, $p^2$ by a 2-edge neighbors, and so on.  Defining the set $\{j\to i\}$ as the set of all possible simple paths coming to node $i$, and $d(j,i)$ the distance between $j$ and $i$ (amount of edges between them), the expected shock\jd{Assuming that there is no \emph{amplification} of shocks} is given by
@@ -36,6 +36,6 @@ where $\phi$ is a cost function associated to the policy $x$ and the instituions
 \min_{x,y}\sup_{p\in\cA(p_0)}&\,\sum_{i=1}^n y_i+\phi(x,y)\\
 \suchthat&r_i(x_i)(1-\epsilon^0_i)-\lambda\leq M(1-y_i),\,i=1,\ldots,N
 \end{align}
-\item Finally, we are looking for a representative agent formulation of the benevolent social planner problem, such that the solutions of both problems coincide.  For example, one wild guess is \cite{?}
-\[\max_x\Lset \Ex^p\Lset\sum_i \pi_i(x_i)\Rset +\frac{\mu}{2}{\rm Var}^p\left(\sum_i \pi_i(x_i)\right)+\frac{\theta}{2}{\rm Var}\left(\sum_i \pi_i(x_i)\right)\Rset\] 
+\item Finally, we are looking for a representative agent formulation of the benevolent social planner problem, such that the solutions of both problems coincide.  For example, one wild guess is to consider the formulation proposed in \cite{?} \jd{Citation needed}, where ambiguity is considered as a  family of possible models for the parameter $p$, along with a probability distribution over these models, $\alpha$.  Therefore, the central planner problem has the following form
+\[\max_x\Lset \Ex^p\Lset\sum_i u_i(x_i)\Rset -\frac{\mu}{2}{\rm Var}^p\left(\sum_i u_i(x_i)\right)-\frac{\theta}{2}{\rm Var}_\alpha\Ex\left(\sum_i u_i(x_i)\right)\Rset\] 
 \end{itemize}
