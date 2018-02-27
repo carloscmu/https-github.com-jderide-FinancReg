@@ -9,8 +9,8 @@ We explore a model with the following features
 \item[3.] There is a central decision maker, focus on the stability of the system.  We discussed the information that is available to this regulator, and propose a mechanism to oversee the overall stability within the financial network thorugh a constraint over the ratio, given by $x_i$.
 
 \item[4.]  The financial institutions decide their ratio by maximizing their profits\footnote{utility?}, given by a function $\pi_i$, with the minimum level of A/L ratio, i.e.,
-\[r_i(x_i)\in\argmax_r\lset \Ex^p\{ \pi(r)\}\mset r\geq x_i,\,r\in R_i\rset\]
-Additionally, assuming that the function $\pi_i$ is nondecreasing on $r$ (and no further restrictions are imposed), the individual solution to this problem is given by $r_i^*=x_i$, i.e., the financial institution sets its ratio at minimum possible level.
+\[r_i(x_i;p)\in\argmax_r\lset \Ex^p\{ \pi(r)\}\mset r\geq x_i,\,r\in R_i\rset\]
+Additionally, assuming that the function $\pi_i$ is nonincreasing on $r$ (and no further restrictions are imposed), the individual solution to this problem is given by $r_i^*=x_i$, i.e., the financial institution sets its ratio at minimum possible level.
 
 \item[5.] There is contagion on the network, described in its stationary state as follows: if institution $i$ gets distressed, there is a probability $p$ that it affects its immediate neighbor, $p^2$ by a 2-edge neighbors, and so on.  Defining the set $\{j\to i\}$ as the set of all possible simple paths coming to node $i$, and $d(j,i)$ the distance between $j$ and $i$ (amount of edges between them), the expected shock\jd{Assuming that there is no \emph{amplification} of shocks} is given by
 \[\epsilon_i=\sum_{j\to i} p^{d(i,j)}\epsilon_j\]
