@@ -57,13 +57,15 @@ S = (Saux+np.eye(npts)).dot(q)
 lopt = lbda/(1.0-S*UB)
 ru = a0/(a1*(1.0-exe))
 
+f = open('Sols.txt', 'w')
+f.write('x;f(x)\n')
 NGrid = 1000
 xx = np.linspace(0.01,0.50,NGrid)
 ff = xx*0.0
 for k in range(0,NGrid):
 	ff[k] = cpopt(xx[k],0)
-	print('x=%1.2f f(x)=%1.2f'%(xx[k],ff[k]))
-
+	f.write('%1.4f;%1.4f\n'%(xx[k],ff[k]))
+f.close()
 plt.plot(xx,ff,linewidth=3.0)
 plt.title(r'{\rm CP - Optimal expected Utility }$\mathbf{E}\{\sum_i \pi_i(r_i^*(x))\}$')
 plt.xlabel(r'$x$')
