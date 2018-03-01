@@ -22,8 +22,8 @@ def epiopt(x,l):
 
 def cpopt(x,grad):
 	s = 0.0
-	N = np.size(x)
-	for n in range(0,N):
+#	N = np.size(x)
+	for n in range(0,npts):
 		s = s + epiopt(x,lopt[n])
 	return s
 
@@ -43,7 +43,10 @@ p = 0.5
 exe = UB/2.0
 
 A = np.zeros((npts,npts))
-q = np.ones(npts)*1.0/npts
+#q = np.ones(npts)*1.0/npts
+q = np.ones(npts)*0.25/2.0
+q[1] = 0.5
+
 
 for i,j in Arcs:
 	A[i,j] = 1.0
@@ -60,11 +63,13 @@ ru = a0/(a1*(1.0-exe))
 f = open('Sols.txt', 'w')
 f.write('x;f(x)\n')
 NGrid = 1000
-xx = np.linspace(0.01,0.50,NGrid)
+xx = np.linspace(0.01,0.10,NGrid)
 ff = xx*0.0
 for k in range(0,NGrid):
 	ff[k] = cpopt(xx[k],0)
 	f.write('%1.4f;%1.4f\n'%(xx[k],ff[k]))
+for n in range(0,npts):
+	f.write('\n %i S = %1.3f\t \lambda = %1.3f\n'%(n,S[n],lopt[n]))
 f.close()
 plt.plot(xx,ff,linewidth=3.0)
 plt.title(r'{\rm CP - Optimal expected Utility }$\mathbf{E}\{\sum_i \pi_i(r_i^*(x))\}$')
