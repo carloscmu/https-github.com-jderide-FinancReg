@@ -1,5 +1,5 @@
 \section{Thu, Mar 1st}
-\subsection{Variance of the CP Problem}
+\subsection{CP Problem}
 Assuming a risk-averse central planner, we can compute the individual variance by
 considering different cases
 \begin{description}
@@ -51,3 +51,36 @@ After some algebra, the final form of the covariances is given by
 0&{\rm ow}
 \end{cases}
 \end{equation}
+
+\jd{Note} By definition of the matrix $S$, it can be interpreted as the truncation of an exponential matrix
+\[S=(\sum_{n=1}^{N-1} (pA)^n+I)q=(\sum_{n=0}^{N-1} (pA)^n)q \approx {\rm e}^{pA}q,\]
+although if we rule out cycles, technically, the matrix does not have elements on the diagonal, thus, it is not $A$
+
+\subsection{Risk-neutral Central Planner}
+Recall the following definitions
+\[S=\sum_{n=0}^{N-1}(pA)^nq,\quad \epsilon^I\sim{\rm U}(0,UB),\quad \lambda_i=\frac{\lambda}{1-S_i\cdot UB}, \quad r^u=\frac{a^0}{a^1}\frac{1}{1-\Ex\epsilon}\]
+The risk-neutral CP maximizes the following function
+\begin{equation}\label{rnutfun}
+\begin{align}
+f(x)&=\Ex\Lset \sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\Rset\\
+&=\sum_{i=1}^N \Ex\Lset\pi_i(r^*_i(x_i)(1-\epsilon_i))\Rset\\
+&=\sum_{i=1}^N \begin{cases}
+a^0-a^1\lambda_i(1-\Ex\{\epsilon\})&0\leq x_i\leq \lambda_i\\
+a^0-a^1x_i(1-\Ex\{\epsilon\})&\lambda_i\leq x_i\leq r^u\\
+0&{\rm ow}
+\end{cases}
+\end{align}
+\end{equation}
+Here, we have two cases: the CP is allowed to impose individual constraints $x_i$, or a general rule $x_i=x,\forall i$. The solution to these problems:
+\begin{description}
+\item[Individual policy] In this case, the problem of maximizing the function $f(x)$ defined in Equation~(\ref{rnutfun}) is separable, and the solution is given by
+\begin{equation}\label{solrncpproind}
+\max_{(x_1,\ldots,x_N} f(x)\iff x_i^*\in\argmax \Ex\pi_i(r^*_i(x_i)(1-\epsilon_i))=[0,\lambda_i],\,i=1,\ldots,N
+\end{equation}
+
+\item[Global policy] In this case, the CP is only able to choose one value of $x$ for every node of the network.  Therefore, the solution that maximizes the utility is given by
+\begin{equation}\label{solrncpproglo}
+\max_{x} f(x)\iff x^*\in\argmax \sum_i\Ex\pi_i(r^*_i(x)(1-\epsilon_i))=[0,\min_{i=1,\ldots,N}\{\lambda_i\}]
+\end{equation}
+\end{description}
+\jd{Note that this analysis always incorporates that the agents internalize the non-default condition, i.e., if the policy $x$ is too low, they natural move their optimal level to the one that avoid the default case}

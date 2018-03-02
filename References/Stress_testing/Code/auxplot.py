@@ -7,13 +7,18 @@ import nlopt
 plt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 plt.rc('text', usetex=True)
 
-def var(x,l,b,a1):
-	if x<=lbda or x>=ru:
+#rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
+#rc('text', usetex=True)
+
+
+def epiopt(x,l):
+	if x <=0 or x>=ru:
 		return 0.0
-	elif x>= lbda and x<=l:
-		return (1.0-lbda/l)*()
+	elif x>= l and x<=ru:
+#		print 'eval lin'
+		return a0-a1*x*(1.0-exe)
 	else:
-		return ((a1*x*b)**2)/12.0
+		return a0-a1*l*(1.0-exe)
 
 def cpopt(x,grad):
 	s = 0.0
