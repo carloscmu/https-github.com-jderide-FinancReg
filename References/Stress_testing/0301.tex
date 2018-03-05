@@ -87,7 +87,7 @@ Here, we have two cases: the CP is allowed to impose individual constraints $x_i
 
 \subsection{Risk-averse CP}
 Given a parameter of risk aversion $\theta$, the CP solves the following problem
-\[x^*\in\argmax_{x} \Lset \Ex\left(\sum_i \pi_i(r^*_i(x_i)(1-\epsilon_i))\right) + \var\left(\sum_i \pi_i(r^*_i(x_i)(1-\epsilon_i))\right)\Rset\]
+\[x^*\in\argmax_{x} \Lset \Ex\left(\sum_i \pi_i(r^*_i(x_i)(1-\epsilon_i))\right) - \frac{\theta}{2}\var\left(\sum_i \pi_i(r^*_i(x_i)(1-\epsilon_i))\right)\Rset\]
 and the formula for the variance can be obtained using Equations~(\ref{indvar},\ref{eqcovij}), and it is given by
 \begin{eqnarray*}
 \var\left(\sum_i \pi_i(r^*_i(x_i)(1-\epsilon_i))\right)&=&\sum_i \var(\pi_i(r^*_i(x_i)(1-\epsilon_i))+2\sum_{j<i}\cov(\pi_i(r^*_i(x_i)(1-\epsilon_i)),\pi_j(r^*_j(x_j)(1-\epsilon_j))\\
