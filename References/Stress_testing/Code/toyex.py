@@ -29,14 +29,22 @@ def cov(x,y,n,m):
         else:
             return (((a1*UB)**2.0)*x*S[n]*y*S[m])/(12.0)
 
-def ExCPRA(x,y):
-    exps = 2.0*expectation(x,0)+expectation(y,1)
+def ExCPRA(x):
+    NN = len(x)
+    exps = 0.0
+    for n in range(0,NN):
+        exps = exps + expectation(x[n],n)
     return exps
 
-def varCPRA(x,y):
-    var =  2.0*variances(x,0)+variances(y,1)
-    covs = 2.0*(cov(x,y,0,1)+cov(x,x,0,2)+cov(x,y,1,2))
-    return (var+covs)
+def varCPRA(x):
+    NN = len(x)
+    vari = 0.0
+    covs = 0.0
+    for n in range(0,NN):
+        vari = vari + variances(x[n],n)
+        for m in range(0,n):
+            covs = covs + 2.0*cov(x[n],x[m],n,m)
+    return (vari+covs)
 
 plt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 plt.rc('text', usetex=True)
@@ -95,8 +103,8 @@ ExpCPRA = np.zeros((NN,NN))
 VarsCPRA = np.zeros((NN,NN))
 for k in range(0,NN):
     for l in range(0,NN):
-        ExpCPRA[k,l] = ExCPRA(xx0[k],xx1[l])
-        VarsCPRA[k,l] = varCPRA(xx0[k],xx1[l])
+        ExpCPRA[k,l] = ExCPRA([xx0[k],xx1[l],xx0[k]])
+        VarsCPRA[k,l] = varCPRA([xx0[k],xx1[l],xx0[k]])
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.plot_surface(X, Y, ExpCPRA)

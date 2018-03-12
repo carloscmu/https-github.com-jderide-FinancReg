@@ -27,7 +27,7 @@
 \usepackage{lineno}
 \linenumbers
 
-\title{A stochastic programming model for systemic financial resiliency}
+\title{A Model for Robust Regulation of Financial Networks}
 \usepackage{authblk}
 \author[1]{Julio Deride \thanks{jaderid@sandia.gov}}
 \author[2]{Carlos Ram\'irez \thanks{carlos.ramirez@frb.gov}}
@@ -38,6 +38,10 @@
 \begin{document}
 \maketitle
 \baselineskip=15pt
+
+\begin{abstract}
+\input{0-Abstract}
+\end{abstract}
 
 \section{Problem}
 Consider a network $\rsG=(V,\,E)$ consisting on a set of $n$ nodes, $V=\{1,\ldots,n\}$, and a set of $m$ undirected edges $\{e_{ij}\}\in E$. Each node $i$ represents one of the institutions identity, and each edge $e_{ij}$ represents the \emph{correlation} or contagion factor between two entities. Let $(\Omega,\rsA,\Pro)$ be a probability space ...
@@ -60,6 +64,8 @@ where $\phi^0$ is the total cost of implementing a capital requirement policy, a
 \input{0228}
 \input{0301}
 \input{0305}
+\input{0308}
+\input{0309}
 \bibliographystyle{plain}
 \bibliography{refer}
 
