@@ -19,9 +19,9 @@ def cov(x,y,n,m):
 def covAmb(x,y,n,m):
     ret = 0.0
     for k in range(1,KAmb):
-        ret0 = max(x,lopt[k][n])*(1.0-S[k][n]*exe)*(max(x,lopt[0][n])*(1.0-S[0][n]*exe))
-        ret1 = max(y,lopt[k][m])*(1.0-S[k][m]*exe)*(max(y,lopt[0][m])*(1.0-S[0][m]*exe))
-        ret = ret+alpha[k]*(ret0+ret1)
+        ret0 = max(x,lopt[k][n])*(1.0-S[k][n]*exe)-(max(x,lopt[0][n])*(1.0-S[0][n]*exe))
+        ret1 = max(y,lopt[k][m])*(1.0-S[k][m]*exe)-(max(y,lopt[0][m])*(1.0-S[0][m]*exe))
+        ret = ret+alpha[k]*(ret0*ret1)
     return ret
 
 def ExCP(x):
