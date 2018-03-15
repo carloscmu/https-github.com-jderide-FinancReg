@@ -17,6 +17,7 @@ from matplotlib.ticker import LinearLocator, FormatStrFormatter
 from matplotlib import cm
 import time
 from scipy.optimize import minimize
+from aniplts import *
 
 def expectation(x,n):
     return a0-a1*max(x,lopt[0][n])*(1.0-S[0][n]*exe)
@@ -74,7 +75,7 @@ def plotNtw(Nodes, Edges, PositionsN,fname):
     plt.savefig(fname)
     plt.close(fig)
 
-def sol3d(X,Y,F,fname,ptitle):
+def sol3d(X,Y,F,fname,ptitle,pltext):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 #    ax.plot_surface(X, Y, F)
@@ -86,7 +87,9 @@ def sol3d(X,Y,F,fname,ptitle):
     ax.xaxis.set_major_formatter(FormatStrFormatter('%0.3f'))
     fig.colorbar(surf, shrink=0.5, aspect=5)
 #    ax.zaxis.set_major_formatter(FormatStrFormatter('%0.3f'))
-    plt.savefig(fname)
+    plt.savefig(fname+pltext)
+    angles = np.linspace(0,360,51)[:-1] # A list of 20 angles between 0 and 360
+    rotanimate(ax, angles,fname+'gif',delay=20)
     plt.close(fig)
 
 def ofUniPolplt(x,f,fname,ptitle):
@@ -149,7 +152,6 @@ def writsol(fname):
     f.write('\n\n'+aux1)
     f.close()
 
-
 plt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 plt.rc('text', usetex=True)
 
@@ -159,8 +161,8 @@ snlcol = ['g', 'r', 'c']
 start_time = time.time()
 
 figext = 'eps'
-bdlo = 0.0
-bdup = 1.0
+bdlo = 0.05
+bdup = 0.07
 
 
 Nodes = set([0,1,2])
@@ -217,9 +219,9 @@ ptitle1 = r'$\mathbf{E}\{\sum_i\pi_i^*\}$'
 ptitle2 = r'${\rm var}\{\sum_i\pi_i^*\}$'
 ptitle3 = r'${\rm var}_\alpha\{\mathbf{E}\sum_i\pi_i^*\}$'
 
-sol3d(X,Y,ExpCP,'AToy-ExCP.'+figext,ptitle1)
-sol3d(X,Y,VarsCP,'AToy-VarsCP.'+figext,ptitle2)
-sol3d(X,Y,VarsACP,'AToy-VarsACP.'+figext,ptitle3)
+sol3d(X,Y,ExpCP,'AToy-ExCP.',ptitle1,figext)
+sol3d(X,Y,VarsCP,'AToy-VarsCP.',ptitle2,figext)
+sol3d(X,Y,VarsACP,'AToy-VarsACP.',ptitle3,figext)
 
 Ex_UniPoli = xx*0.0
 Var_UniPoli = xx*0.0
@@ -232,6 +234,7 @@ ofUniPolplt(xx,Ex_UniPoli,'AToy-ExCPUP.'+figext,ptitle1)
 ofUniPolplt(xx,Var_UniPoli,'AToy-VarCPUP.'+figext,ptitle2)
 ofUniPolplt(xx,VarA_UniPoli,'AToy-VarACPUP.'+figext,ptitle3)
 
+
 F_UniPoli = {}
 
 NTT = 1
@@ -243,12 +246,11 @@ for nu in range(0,NTT):
     for kappa in range(0,NGG):
         FCP[nu,kappa] = ExpCP - (theta[nu]/2.0)*VarsCP - (gamma[kappa]/2.0)*VarsACP
         F_UniPoli[nu,kappa] = Ex_UniPoli - (theta[nu]/2.0)*Var_UniPoli - (gamma[kappa]/2.0)*VarA_UniPoli
-        pname='AToy-FCP_%1.2f_%1.2f.'%(theta[nu],gamma[kappa])
-        pnameUP='AToy-FCPUP_%1.2f_%1.2f.'%(theta[nu],gamma[kappa])
+        fname='AToy-FCP_%1.2f_%1.2f.'%(theta[nu],gamma[kappa])
+        fnameUP='AToy-FCPUP_%1.2f_%1.2f.'%(theta[nu],gamma[kappa])
         ptitle = r'$\mathbf{E}\{\sum_i\pi_i^*\}-\frac{\theta}{2}{\rm var}(\sum_i\pi^*_i)-\frac{\gamma}{2}{\rm var}_{\alpha}(\mathbf{E}\sum_i\pi^*_i), \theta=%1.3f,\gamma=%1.3f$'%(theta[nu],gamma[kappa])
-        fname = pname+figext
-        sol3d(X,Y,FCP[nu,kappa],fname,ptitle)
-        ofUniPolplt(xx,F_UniPoli[nu,kappa],pnameUP+figext,ptitle)
+        sol3d(X,Y,FCP[nu,kappa],fname,ptitle,figext)
+        ofUniPolplt(xx,F_UniPoli[nu,kappa],fnameUP+figext,ptitle)
 
 print("--- %s seconds ---" % (time.time() - start_time))
 
@@ -288,6 +290,7 @@ for kappa in range(0,NGG):
 #    plt.title(pname)
 #    plt.savefig(fname+figext)
 #    plt.close()
+pfilean = 'AToy-animated.'
 GG,TT = np.meshgrid(gamma,tt)
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
@@ -296,15 +299,17 @@ ax.set_xlabel(r'Ambiguity parameter $\gamma$')
 ax.set_ylabel(r'Uniform policy $x$')
 ax.set_title(r'Objective function, universal policy')
 fig.colorbar(surf, shrink=0.5, aspect=5)
-plt.savefig('AToy-OFSurf.'+figext)
+plt.savefig(pfilean+figext)
 #from aniplts import *
-#angles = np.linspace(0,360,21)[:-1] # A list of 20 angles between 0 and 360
+angles = np.linspace(0,360,51)[:-1] # A list of 20 angles between 0 and 360
 # # create an animated gif (20ms between frames)
-#rotanimate(ax, angles,'AToy-movie.gif',delay=20)
+rotanimate(ax, angles,pfilean+'gif',delay=20)
 # # create a movie with 10 frames per seconds and 'quality' 2000
 #rotanimate(ax, angles,'AToy-movie.mp4',fps=10,bitrate=2000)
 # # create an ogv movie
 #rotanimate(ax, angles, 'AToy-movie.ogv',fps=10)
 plt.show()
 plt.close(fig)
+
+
 print("--- %s seconds ---" % (time.time() - start_time))

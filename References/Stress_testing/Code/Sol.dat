@@ -5,9 +5,9 @@ Resilient financial regulation
  a0: 1.000
  a1: 1.000
  UB: 0.250
- Lower bound for plotting 0.000
+ Lower bound for plotting 0.050
 
- Upper bound for plotting 1.000
+ Upper bound for plotting 0.070
 
  Nodes:	0	1	2
  Positions:
