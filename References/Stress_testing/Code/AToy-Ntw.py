@@ -106,9 +106,11 @@ def ofUniPolplt(x,f,fname,ptitle):
 
 def objfunction(x,theta,gamma):
     return -ExCP(x) + (theta/2.0)*varCP(x) + (gamma/2.0)*varACP(x) - 1e-1*sum(abs(x[n]) for n in range(0,npts))
+#    return varACP(x) - 1e-4*sum(abs(x[n]) for n in range(0,npts))
 
 def objfunctionUP(x,theta,gamma):
-    return -ExCP(x*np.ones(npts)) + (theta/2.0)*varCP(x*np.ones(npts)) + (gamma/2.0)*varACP(x*np.ones(npts)) - 1e-2*abs(x)
+    return -ExCP(x*np.ones(npts)) + (theta/2.0)*varCP(x*np.ones(npts)) + (gamma/2.0)*varACP(x*np.ones(npts)) - 1e-8*abs(x)
+#    return (gamma/2.0)*varACP(x*np.ones(npts)) - 1e-4*abs(x)
 
 def writsol(fname):
     f = open(fname,'w')
@@ -146,8 +148,8 @@ def writsol(fname):
     aux1 = '\n\n Optimal Sols:\n theta[nu];gamma[kappa];Xopt[nu,kappa];Fopt[nu,kappa]\n'
     for nu in range(0,NTT):
         for kappa in range(0,NGG):
-            aux = aux+'%1.3f ; %1.3f ; %1.5f ; %1.5f; %1.5f ; %1.5f \n'%(theta[nu],gamma[kappa],Xopt[nu,kappa][0],Xopt[nu,kappa][1],Xopt[nu,kappa][2],Fopt[nu,kappa])
-            aux1 = aux1+'%1.3f ; %1.3f ; %1.5f ; %1.5f \n'%(theta[nu],gamma[kappa],Topt[nu,kappa],Ftopt[nu,kappa])
+            aux = aux+'%1.3f ; %1.3f ; %1.10f ; %1.10f; %1.10f ; %1.10f \n'%(theta[nu],gamma[kappa],Xopt[nu,kappa][0],Xopt[nu,kappa][1],Xopt[nu,kappa][2],Fopt[nu,kappa])
+            aux1 = aux1+'%1.3f ; %1.3f ; %1.10f ; %1.10f \n'%(theta[nu],gamma[kappa],Topt[nu,kappa],Ftopt[nu,kappa])
     f.write(aux)
     f.write('\n\n'+aux1)
     f.close()
@@ -235,61 +237,70 @@ ofUniPolplt(xx,Var_UniPoli,'AToy-VarCPUP.'+figext,ptitle2)
 ofUniPolplt(xx,VarA_UniPoli,'AToy-VarACPUP.'+figext,ptitle3)
 
 
-F_UniPoli = {}
+#F_UniPoli = {}
 
-NTT = 1
-theta = np.linspace(0.0,1e3*(NTT-1),NTT)
-NGG = 1
-gamma = np.linspace(0.0,1e3*(NGG-1),NGG)
-FCP = {}
-for nu in range(0,NTT):
-    for kappa in range(0,NGG):
-        FCP[nu,kappa] = ExpCP - (theta[nu]/2.0)*VarsCP - (gamma[kappa]/2.0)*VarsACP
-        F_UniPoli[nu,kappa] = Ex_UniPoli - (theta[nu]/2.0)*Var_UniPoli - (gamma[kappa]/2.0)*VarA_UniPoli
-        fname='AToy-FCP_%1.2f_%1.2f.'%(theta[nu],gamma[kappa])
-        fnameUP='AToy-FCPUP_%1.2f_%1.2f.'%(theta[nu],gamma[kappa])
-        ptitle = r'$\mathbf{E}\{\sum_i\pi_i^*\}-\frac{\theta}{2}{\rm var}(\sum_i\pi^*_i)-\frac{\gamma}{2}{\rm var}_{\alpha}(\mathbf{E}\sum_i\pi^*_i), \theta=%1.3f,\gamma=%1.3f$'%(theta[nu],gamma[kappa])
-        sol3d(X,Y,FCP[nu,kappa],fname,ptitle,figext)
-        ofUniPolplt(xx,F_UniPoli[nu,kappa],fnameUP+figext,ptitle)
+#NTT = 1
+#theta = np.linspace(0.0,1e3*(NTT-1),NTT)
+#NGG = 1
+#gamma = np.linspace(0.0,1e3*(NGG-1),NGG)
+#FCP = {}
+#for nu in range(0,NTT):
+#    for kappa in range(0,NGG):
+#        FCP[nu,kappa] = ExpCP - (theta[nu]/2.0)*VarsCP - (gamma[kappa]/2.0)*VarsACP
+#        F_UniPoli[nu,kappa] = Ex_UniPoli - (theta[nu]/2.0)*Var_UniPoli - (gamma[kappa]/2.0)*VarA_UniPoli
+#        fname='AToy-FCP_%1.2f_%1.2f.'%(theta[nu],gamma[kappa])
+#        fnameUP='AToy-FCPUP_%1.2f_%1.2f.'%(theta[nu],gamma[kappa])
+#        ptitle = r'$\mathbf{E}\{\sum_i\pi_i^*\}-\frac{\theta}{2}{\rm var}(\sum_i\pi^*_i)-\frac{\gamma}{2}{\rm var}_{\alpha}(\mathbf{E}\sum_i\pi^*_i), \theta=%1.3f,\gamma=%1.3f$'%(theta[nu],gamma[kappa])
+#        sol3d(X,Y,FCP[nu,kappa],fname,ptitle,figext)
+#        ofUniPolplt(xx,F_UniPoli[nu,kappa],fnameUP+figext,ptitle)
 
 print("--- %s seconds ---" % (time.time() - start_time))
 
-x0 = np.array([0.1,0.1,0.1])
-t0 = 0.075
-NTT = 1
-theta = np.linspace(0.0,1e3*(NTT-1),NTT)
-NGG = 101
-gamma = np.linspace(0.0,1e1*(NGG-1),NGG)
-Fopt = {}
-Ftopt = {}
-Xopt = {}
-Topt = {}
-for nu in range(0,NTT):
-    for kappa in range(0,NGG):
-        res = minimize(objfunction, x0, args=(theta[nu],gamma[kappa]),method='Nelder-Mead',options={'xtol': 1e-12})#, 'disp': True})
-        Xopt[nu,kappa] = res.x
-        Fopt[nu,kappa] = -objfunction(res.x,theta[nu],gamma[kappa])
-        res = minimize(objfunctionUP, t0, args=(theta[nu],gamma[kappa]),method='Nelder-Mead',options={'xtol': 1e-12})#, 'disp': True})
-        Topt[nu,kappa] = res.x
-        Ftopt[nu,kappa] = -objfunctionUP(res.x,theta[nu],gamma[kappa])
+x0 = np.array([0.07,0.075,0.07])
+t0 = 0.0725
+#NTT = 10
+#theta = np.linspace(0.0,1e3*(NTT-1),NTT)
+#NGG = 10
+#gamma = np.linspace(0.0,1e4*(NGG-1),NGG)
+#Fopt = {}
+#Ftopt = {}
+#Xopt = {}
+#Topt = {}
+#for nu in range(0,NTT):
+#    for kappa in range(0,NGG):
+#        res = minimize(objfunction, x0, args=(theta[nu],gamma[kappa]),method='Nelder-Mead',options={'xtol': 1e-12})#, 'disp': True})
+#        Xopt[nu,kappa] = res.x
+#        Fopt[nu,kappa] = -objfunction(res.x,theta[nu],gamma[kappa])
+#        res = minimize(objfunctionUP, t0, args=(theta[nu],gamma[kappa]),method='Nelder-Mead',options={'xtol': 1e-12})#, 'disp': True})
+#        Topt[nu,kappa] = res.x
+#        Ftopt[nu,kappa] = -objfunctionUP(res.x,theta[nu],gamma[kappa])
+
+res = minimize(objfunction, x0, args=(0,0),method='Nelder-Mead',options={'xtol': 1e-12})#, 'disp': True})
+Xopt[nu,kappa] = res.x
+Fopt[nu,kappa] = -objfunction(res.x,0,0)
+res = minimize(objfunctionUP, t0, args=(0,0),method='Nelder-Mead',options={'xtol': 1e-12})#, 'disp': True})
+Topt[nu,kappa] = res.x
+Ftopt[nu,kappa] = -objfunctionUP(res.x,0,0)
+
 writsol('Sol.dat')
 
+
+
 tt = np.linspace(bdlo,bdup,NN)
-ff = np.zeros((NN,NGG))
-for kappa in range(0,NGG):
-    for i in range(0,NN):
-        ff[i,kappa] = -objfunctionUP(tt[i],0.0,gamma[kappa])
-#    fig = plt.figure()
-#    plt.plot(tt,ff[nu,kappa])
-#    plt.axvline(x=Topt[nu,kappa])
-#    for k in range(0,KAmb):
-#        for i in range(0,npts):
-#            plt.axvline(x=lopt[k][i], linestyle='dotted', linewidth=0.3, color=snlcol[i])
-#    pname = r'Objective function, universal policy for $\theta=%4.0f$, $\gamma=%4.0f$'%(theta[nu],gamma[kappa])
-#    fname = 'AToy-ObFnUP+%i%i.'%(theta[nu],gamma[kappa])
-#    plt.title(pname)
-#    plt.savefig(fname+figext)
-#    plt.close()
+ff = 0.0*tt
+for i in range(0,NN):
+    ff[i] = varACP(tt[i]*np.ones(npts))
+fig = plt.figure()
+plt.plot(tt,ff)
+plt.axvline(x=Topt[0,0])
+for k in range(0,KAmb):
+    for i in range(0,npts):
+        plt.axvline(x=lopt[k][i], linestyle='dotted', linewidth=0.3, color=snlcol[i])
+pname = r'Ambiguity variance, universal policy'
+fname = 'AToy-ObFnUP.'
+plt.title(pname)
+plt.savefig(fname+figext)
+plt.close()
 pfilean = 'AToy-animated.'
 GG,TT = np.meshgrid(gamma,tt)
 fig = plt.figure()
