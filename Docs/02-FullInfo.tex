@@ -1,0 +1,88 @@
+\section{Full information model}
+Consider an economy consisting on financial institutions that hold obligations between them.  This economy is represented using a network, where each institution is represented by a node, and the corresponding obligations are represented by arcs.  Denote by $\cN=\{1,\ldots,N\}$ the set of financial institutions, and $\cA=\{e_{ij}:i,j\in\cN\}$ the set of financial obligations.  Each financial institution $i$ is concerned about their profit maximization,  by deciding an optimal level of a liquidity index \jd{A/L?, explain this}, denoted by $r_i$.
+
+This economy faces an liquidity shock that propagates through the network, and it is modeled as a random variable $\epsilon_0\sim{\rm U}(0,b)$.  By simplicity, let's assume that this shock affects initially institution $i$ with probability $q_i$, or it affect any other institution in the network, but it propagates by a fraction $p$ of the shock to its neighbors.  Thus, the corresponding shock that institution $i$ faces, comes either from the idiosyncratic shock, or through its neighbors (or any simple-connected neighbor in the network).  Let $A$ be the adjencency matrix, i.e. $A_{i,j} = \begin{cases} 1 & (i,j)\in\cA\\ 0 &o.w.\end{cases}$, and let $\epsilon=(\epsilon_1,\ldots,\epsilon_N)$ be the vector of expected shocks.  The shock vector satisfies
+
+\begin{equation}\label{eps}
+\epsilon = S(p)\epsilon_0,\quad S(p)=\left(I +\sum_{k=1}^{N-1}p^k\tilde{A}^k\right)q,\quad \tilde{A}_1=A,\,\tilde{A}_k = A\tilde{A}_{k-1}-{\rm diag}(A\tilde{A}_{k-1})
+\end{equation}
+
+Each institution $i$ is assume to be under \emph{distress} if its liquidity index after the effect of the shock is below a given threshold $\lambda$.  Thus,
+\begin{equation}\label{distress}
+{\rm institution}\,i\,{\rm is\,under\,distress} \iff r_i(1-\epsilon_i) < \lambda.
+\end{equation}
+
+Additionally, we consider a benevolent financial regulator or central planner, whose goal is to maintain the stability of the financial system, while encouraging the utility maximization of each of the participants.  The only mechanism that this regulator dispose is a minimum capital requirement, that firstly, we assume that is institution-contingent.  By denoting this liquidity requirement policy by $x=(x_1,\ldots,x_N)$, and giving the propagation factor $p$, the institution $i$ solves the following optimization problem
+\begin{equation}\label{imax}
+r^*_i(x_i;p)\in\argmax_{r\in R_i} \lset \Ex_p\{ \pi_i(r(1-\epsilon_i))\} \mset r\geq x_i,\,\Ex_p\{\pi_i(r(1-\epsilon_i))\}\geq 0\rset,
+\end{equation}
+where $\epsilon_i$ comes from Equation~(\ref{eps}).  Let's consider a linear utility function, uniform for every agent, defined by
+\[\pi(\tau)=\begin{cases} a_0-a_1\tau&\tau\geq \lambda\\ 0 & {\rm o.w.}\end{cases}.\]
+Therefore, the expectation is given by
+\begin{eqnarray*}
+\Ex\{ \pi_i(r(1-\epsilon_i))\}&=&\begin{cases}
+0&1-\frac{\lambda}{r}\leq 0\\
+a_0-a_1r(1-\Ex\{\epsilon\})&\frac{1}{S_i(p)\cdot b}\left(1-\frac{\lambda}{r}\right)\geq 1\\
+\frac{1}{(S_i(p)\cdot b)^2}\left(1-\frac{\lambda}{r}\right)^2\left(a_0-a_1r\left(1-\frac{1}{2}\left(1-\frac{\lambda}{r}\right)\right)\right)\,&{\rm o.w.}
+\end{cases}
+\end{eqnarray*}
+Note that this function is continuous.  Define 
+\[\lambda_i(p)=\frac{1}{1-S_i(p)\cdot b}\,\lambda, \quad \bar{\epsilon}=\Ex\{\epsilon_0\}=\frac{b}{2},\quad r^u=\frac{a^0}{a^1}\frac{1}{1-\bar{\epsilon}}.\]
+
+The optimal value for $x_i\geq 0$ is given by
+\begin{equation}\label{optri}
+r_i^*(x_i)\in\argmax_{r\in R_i} \lset \Ex_p\{ \pi_i(r(1-\epsilon_i))\}\mset r\geq x_i, \Ex_p\{ \pi_i(r(1-\epsilon_i))\}\geq 0\rset = \begin{cases}
+\emptyset & x_i\geq r^u\\
+\lambda_i& 0\leq x_i<\lambda_i\\
+x_i& \mbox{o.w}\end{cases}
+\end{equation}
+The function $\Ex_p\{ \pi_i(r(1-\epsilon_i))\}$ is depicted in Figure~(\ref{figExUt}).  From here it is easy to see that the optimum of the optimization problem depends on the values of $x_i$.
+
+\begin{figure}[htbp] 
+%\begin{minipage}{1.0\textwidth}
+\centering
+\begin{minipage}[t]{0.49\textwidth}
+%\begin{figure}[htbp] 
+   \centering
+   \includegraphics[width=0.95\textwidth]{Figures/ExpectedUt} 
+   \caption{Expected utility}
+   \label{figExUt}
+%\end{figure}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.49\textwidth}
+%\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=0.95\textwidth]{Figures/OptExpUt} 
+   \caption{Optimal Expected utility}
+   \label{figOpExUt}
+%\end{figure}
+\end{minipage}
+%\end{minipage}
+\end{figure}
+
+Finally, the optimal expected utility is given by
+\begin{equation}\label{eqEPOpt}
+\Ex_p\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}=\begin{cases}
+a_0-a_1x_i(1-\bar\epsilon)&\lambda_i\leq x_i\leq r^u\\
+a_0-a_1\lambda_i(1-\bar\epsilon)&0\leq x_i\leq \lambda_i\\
+0&{\rm ow}
+\end{cases}
+\end{equation}
+and it's depicted on Figure~(\ref{figOpExUt}).  It's safe to assume that the utility parameters $a_0,\,a_1$ are such that $r^u\geq 1$, and, therefore, we can dismiss the case of $r_i\geq r^u$ \jd{more on this}.  Then, the optimal policy, and optimal expected utility can be written as
+\[r_i^*(x_i)=\max\{\lambda_i(p),x_i\},\quad \Ex_p\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}=a_0-a_1\max\{\lambda_i(p),x_i\}(1-\bar{\epsilon}).\]
+
+\jd{comment of autoregulation on the agent's strategy.  Add the impossibility of distress. }
+
+\subsection{Central Planner \jd{regulator?} Problem}
+In this section we study the problem of a benevolent \jd{por supuesto!} central problem, whose main problem is to guarantee the stability of the financial network under capital shocks. The mechanism available for the Central Planner, is the minimum capital index required for each institution, i.e., this agent decides $x=(x_1,\ldots,x_N)$.  The central planner faces the problem of guaranteeing financial stability, as long as maximizing each institution's utility.  In this setting, we introduce ambiguity on the propagation parameters, i.e., the central planner has partial knowledge on the parameter $p$, that is modeled as a random variable with possible outcomes $\{p_1,\ldots,p_K\}$, with associated probabilities $\alpha_i=\Pro\{p=p_i\}$.  Denoting $\bar{p}=\Ex\{p\}$, we consider three possible objective functions, describing the goal of the central planner, based on the approach presented on \cite{Mac13alpha}
+\begin{equation}\label{objcp}
+f_{\theta,\gamma}(x)= \Ex_{\bar p}\Lset\sum_{i=1}^N \pi_i(r_i^*(x_i)(1-\epsilon_i))\Rset-\frac{\theta}{2}\var_{\bar p}\left(\sum_{i=1}^N\pi_i(r_i^*(x_i)(1-\epsilon_i))\right)-\frac{\gamma}{2}\var_\alpha\left(\sum_{i=1}^N\Ex_{p_i}\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}\right)
+\end{equation}
+L
+
+\subsubsection{Risk-neutral Central Planner (RNCP) $(\theta=0,\gamma=0)$}
+
+\subsubsection{Risk-averse Central Planner (RACP) $(\theta>0,\gamma=0)$}
+
+\subsubsection{Ambiguity-averse Central Planner (AACP) $(\theta>0,\gamma>0)$}

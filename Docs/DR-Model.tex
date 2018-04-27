@@ -1,0 +1,57 @@
+\documentclass[12pt,letterpaper]{article}
+\input macawlrs.tex
+\newcommand{\jd}[1]{\textcolor{blue}{${\textrm{Julio: }}${#1}}}
+
+\usepackage[scale=0.845]{geometry}
+
+
+%\usepackage[urw-garamond]{mathdesign}
+%\usepackage[T1]{fontenc}
+
+%\usepackage[cmintegrals,cmbraces]{newtxmath}
+%\usepackage{ebgaramond-maths}
+%\usepackage[T1]{fontenc}
+\usepackage{svg}
+
+\usepackage[light,math]{iwona}
+
+\usepackage{fancyheadings}
+\usepackage{lastpage}
+\lhead{\tt Deride-Ram\'irez - Working note}
+\chead{\tt SNL-FRB}
+\rhead{\tt \today}
+\cfoot{\tt \small Page \thepage\ of \pageref{LastPage}\\ Do not circulate}
+
+\pagestyle{fancyplain}
+
+
+\usepackage{lineno}
+\linenumbers
+
+\title{A Model for Robust Regulation of Financial Networks}
+\usepackage{authblk}
+\author[1]{Julio Deride \thanks{jaderid@sandia.gov}}
+\author[2]{Carlos Ram\'irez \thanks{carlos.ramirez@frb.gov}}
+\affil[1]{Sandia National Laboratories, USA}
+\affil[2]{Federal Reserve Board, USA}
+\renewcommand\Authands{ and }
+
+\begin{document}
+\maketitle
+\baselineskip=15pt
+
+\begin{abstract}
+\input{00-Abstract}
+\end{abstract}
+
+\input{01-Intro}
+\input{02-FullInfo}
+\input{03-AsymInfo}
+\input{04-GenEx}
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{refer}
+
+
+\end{document}

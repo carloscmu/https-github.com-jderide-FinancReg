@@ -1,0 +1,9 @@
+\section{Mon, Mar 19th}
+\subsection{CP Ambiguity: Adjacency matrix}
+We introduce the first modification of our model.  We consider a scenario where the CP does not have full information regarding the exposure of each financial institution.  Thus, we modeled this by removing the assumption of full knowledge of the matrix $A$ and partial knowledge of $p$, instead, we introduced a random exposure matrix, $E=(e_{ij})$, where each $e_{ij}$ is a non-negative random variable such that,
+\[\mathbf{e}_{ij}=\bar{e}_{ij}(1+\mathbf{\delta}_{ij}),\quad \Ex\delta_{ij}=0,\delta_{ij}\in\{\}.\] 
+
+In this case, the shock propagation is assumed to take the same form.  Assuming the idiosyncratic shock $\epsilon^I\sim{\rm U}(0,b)$ only affects one agent initially, the shock for each agent is given by
+\[\epsilon = S\epsilon^I,\quad S=\left( I+\sum_{k=1}^{N-1} A_k \right) q,\quad A_1=E,\,A_k=EA_{k-1}-{\rm diag}(EA_{k-1}).\]
+
+Assume that $\epsilon^I$ and $\delta$ are independent random variables\jd{Reasonable}.  

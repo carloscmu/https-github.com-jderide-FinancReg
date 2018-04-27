@@ -1,0 +1,41 @@
+\section{Tue, Feb 20th}
+We explore a model with the following features
+\begin{itemize}
+\item[1.] Consider a graph $G=(N,E)$, where each node represents a financial institution, and each edge reflects financial transactions between two institutions. 
+
+\item[2.] Instituion $i$ faces a financial shock, represented as $\epsilon_i$, which impacts its assets over liabilities ratio, defined as $r_i=\frac{A_i}{L_i}$, \footnote{Capital?}.  Additionally, we consider that a financial institution is under \emph{distress} if its ratio is under a (given) threshold $\lambda\in(0,1)$.  Thus,
+\[i\;{\rm under\,distress}\iff r_i(1-\epsilon_i)<\lambda\]
+
+\item[3.] There is a central decision maker, focus on the stability of the system.  We discussed the information that is available to this regulator, and propose a mechanism to oversee the overall stability within the financial network thorugh a constraint over the ratio, given by $x_i$.
+
+\item[4.]  The financial institutions decide their ratio by maximizing their profits\footnote{utility?}, given by a function $\pi_i$, with the minimum level of A/L ratio, i.e.,
+\[r_i(x_i;p)\in\argmax_r\lset \Ex^p\{ \pi(r)\}\mset r\geq x_i,\,r\in R_i\rset\]
+Additionally, assuming that the function $\pi_i$ is nonincreasing on $r$ (and no further restrictions are imposed), the individual solution to this problem is given by $r_i^*=x_i$, i.e., the financial institution sets its ratio at minimum possible level.
+
+\item[5.] There is contagion on the network, described in its stationary state as follows: if institution $i$ gets distressed, there is a probability $p$ that it affects its immediate neighbor, $p^2$ by a 2-edge neighbors, and so on.  Defining the set $\{j\to i\}$ as the set of all possible simple paths coming to node $i$, and $d(j,i)$ the distance between $j$ and $i$ (amount of edges between them), the expected shock\jd{Assuming that there is no \emph{amplification} of shocks} is given by
+\[\epsilon_i=\sum_{j\to i} p^{d(i,j)}\epsilon_j\]
+and by defining the matrix $A_{ij}=\sum_{j\to i} p^{d(i,j)}$, the acceptable shocks are the solution of the eigen problem for the matrix $A$.  Moreover, we interpret $A$ as an stochastic (transition) matrix by enlarging it with an extra \emph{not distressed} node as follows,
+\[\Tilde A=\left[\begin{array}{c|cccc|c}
+&1&2&\ldots&n&ND\\
+\hline
+1&0&\sum_{2\to 1} p^{d(2,1)}&\ldots&\sum_{n\to 1} p^{d(n,1)}&1-\sum A_{1\cdot}\\
+\vdots&\vdots&\ddots&\vdots&\vdots\\
+n&\sum_{n\to 1} p^{d(n,1)}&\vdots&\ldots&0&1-\sum A_{1\cdot}\\
+\hline
+ND&0&0&0&0&1
+\end{array}\right]\] 
+This is a stochastic matrix, and thus, it has an eigenvalue with value 1, wich associated eigenvector $\tilde \epsilon^0$.  Let's consider the first $n$ components as acceptable shocks $\epsilon^0$ for the corresponding nodes.
+\item Finally, consider the optimization problem solved by the central planner: set the ratio level\jd{sth about the condition previously stated}, such that it minimizes the total amount of financial institutions under distress.  Let $y_i\in\{0,1\}$ a binary variable such that $y_i=1$ if insititution $i$ is under distress or $y_i=0$ otherwise, and let $M>0$ large enough such that
+\begin{align}\label{form1}
+\min_{x,y}&\,\sum_{i=1}^n y_i+\phi(x,y)\\
+\suchthat&r_i(x_i)(1-\epsilon^0_i)-\lambda\leq M(1-y_i),\,i=1,\ldots,N
+\end{align}
+where $\phi$ is a cost function associated to the policy $x$ and the instituions on distress.  Note that this formulation depends on $p$ and the topology of the network through the selection of the $\epsilon^0$.
+\item The optimization problem \ref{form1} can have a robust formulation by considering an ambiguity set for the parameter $p$, thus
+\begin{align}\label{formr1}
+\min_{x,y}\sup_{p\in\cA(p_0)}&\,\sum_{i=1}^n y_i+\phi(x,y)\\
+\suchthat&r_i(x_i)(1-\epsilon^0_i)-\lambda\leq M(1-y_i),\,i=1,\ldots,N
+\end{align}
+\item Finally, we are looking for a representative agent formulation of the benevolent social planner problem, such that the solutions of both problems coincide.  For example, one wild guess is to consider the formulation proposed in \cite{?} \jd{Citation needed}, where ambiguity is considered as a  family of possible models for the parameter $p$, along with a probability distribution over these models, $\alpha$.  Therefore, the central planner problem has the following form
+\[\max_x\Lset \Ex^p\Lset\sum_i u_i(x_i)\Rset -\frac{\mu}{2}{\rm Var}^p\left(\sum_i u_i(x_i)\right)-\frac{\theta}{2}{\rm Var}_\alpha\Ex\left(\sum_i u_i(x_i)\right)\Rset\] 
+\end{itemize}
