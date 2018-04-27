@@ -79,10 +79,41 @@ In this section we study the problem of a benevolent \jd{por supuesto!} central 
 \begin{equation}\label{objcp}
 f_{\theta,\gamma}(x)= \Ex_{\bar p}\Lset\sum_{i=1}^N \pi_i(r_i^*(x_i)(1-\epsilon_i))\Rset-\frac{\theta}{2}\var_{\bar p}\left(\sum_{i=1}^N\pi_i(r_i^*(x_i)(1-\epsilon_i))\right)-\frac{\gamma}{2}\var_\alpha\left(\sum_{i=1}^N\Ex_{p_i}\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}\right)
 \end{equation}
-L
+This function offers a three different possibilities of analysis: first, the central planner is only concerned in maximizing the expected utility, under the expected propagation factor $\bar{p}$, secondly, the objective is to maximize the expected utility as well as minimizing the risk of the sum of utility functions, and lastly, the objective is to extend the previous case by adding a risk minimization on the ambiguity coming from the possibility of having different values of $p$.
 
 \subsubsection{Risk-neutral Central Planner (RNCP) $(\theta=0,\gamma=0)$}
+In this case, the propagation factor is fixed to $\bar p$, thus the risk-neutral central planner solves the following optimization problem
+\begin{equation}\label{eq:rncp}
+x^*=(x_1^*,\ldots,x_N^*)\in\argmax_{x_1,\ldots,x_N} f_{0,0}(x)=\Ex_{\bar p}\Lset\sum_{i=1}^N \pi_i(r_i^*(x_i)(1-\epsilon_i))\Rset = \sum_{i=1}^N \Ex_{\bar p} \pi_i(r_i^*(x_i)(1-\epsilon_i))
+\end{equation}
+
+The central planner can adopt two possible strategies, depending on the final goal \jd{more on this}: on one hand, impose individual capital index constraints, given by an individual policy $x_i$ for each institution. On the other hand, for information considerations, the proposed policy is a general rule, i.e., $x_i=x,\forall i$.
+
+The solution to these two optimization problems are given by:
+\begin{description}
+\item[Individual policy] In this case, the problem of maximizing the function $f_{0,0}(x)$ defined in Equation~(\ref{eq:rncp}) is separable on each $x_i$, and the solution is given by
+\begin{equation}\label{eq:solrncpi}
+\max_{(x_1,\ldots,x_N} f_{0,0}(x)\iff x_i^*\in\argmax \Ex_{\bar{p}}\pi_i(r^*_i(x_i)(1-\epsilon_i))=[0,\lambda_i(\bar{p})],\,i=1,\ldots,N
+\end{equation}
+
+\item[Global policy] In this case, the central planner is only able to choose one value of $x$ for every institution of the financial network.  Therefore, the solution that maximizes the utility is given by
+\begin{equation}\label{eq:solrncpu}
+\max_{x} f_{0,0}(x)\iff x^*\in\argmax \sum_{i=1}^N \Ex_{\bar{p}}\pi_i(r^*_i(x)(1-\epsilon_i))=[0,\min_{i=1,\ldots,N}\{\lambda_i(\bar{p})\}]
+\end{equation}
+\end{description}
+\jd{Note that this analysis always incorporates that the agents internalize the non-default condition, i.e., if the policy $x$ is too low, they natural move their optimal level to the one that avoid the default case}
 
 \subsubsection{Risk-averse Central Planner (RACP) $(\theta>0,\gamma=0)$}
+Given a parameter of risk aversion $\theta>0$, the central planner solves the following problem
+\begin{equation}\label{eq:racp}
+x^*\in\argmax_{x} \Lset \Ex_{\bar p}\left(\sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\right) - \frac{\theta}{2}\var_{\bar p} \left(\sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\right)\Rset.
+\end{equation}
+In order to analyze this optimization problem, we need to compute the pairwise covariances. 
+
+%\begin{eqnarray*}
+%\var_{\bar p}\left(\sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\right)&=&\sum_i \var(\pi_i(r^*_i(x_i)(1-\epsilon_i))+2\sum_{j<i}\cov(\pi_i(r^*_i(x_i)(1-\epsilon_i)),\pi_j(r^*_j(x_j)(1-\epsilon_j))\\
+%\end{eqnarray*}
+%and the formula for the variance can be obtained using Equations~(\ref{indvar},\ref{eqcovij}), and it is given by
+
 
 \subsubsection{Ambiguity-averse Central Planner (AACP) $(\theta>0,\gamma>0)$}
