@@ -1,0 +1,40 @@
+\begin{thebibliography}{1}
+
+\bibitem{Ace16network}
+Daron Acemoglu, Azarakhsh Malekian, and Asu Ozdaglar.
+\newblock Network security and contagion.
+\newblock {\em Journal of Economic Theory}, 166:536--585, 2016.
+
+\bibitem{Con16resilience}
+Hamed Amini, Rama Cont, and Andreea Minca.
+\newblock Resilience to contagion in financial networks.
+\newblock {\em Mathematical finance}, 26(2):329--365, 2016.
+
+\bibitem{Cap16systemic}
+Agostino Capponi.
+\newblock Systemic risk, policies, and data needs.
+\newblock {\em INFORMS Tutorials in Operations Research: Optimization
+  Challenges in Complex, Networked and Risky Systems}, pages 185--206, 2016.
+
+\bibitem{Che16optimization}
+Nan Chen, Xin Liu, and David~D Yao.
+\newblock An optimization view of financial systemic risk modeling: Network
+  effect and market liquidity effect.
+\newblock {\em Operations research}, 64(5):1089--1108, 2016.
+
+\bibitem{Gla16contagion}
+Paul Glasserman and H~Peyton Young.
+\newblock Contagion in financial networks.
+\newblock {\em Journal of Economic Literature}, 54(3):779--831, 2016.
+
+\bibitem{Mac13alpha}
+Fabio Maccheroni, Massimo Marinacci, and Doriana Ruffino.
+\newblock Alpha as ambiguity: Robust mean-variance portfolio analysis.
+\newblock {\em Econometrica}, 81(3):1075--1113, 2013.
+
+\bibitem{Wat99networks}
+Duncan~J Watts.
+\newblock Networks, dynamics, and the small-world phenomenon.
+\newblock {\em American Journal of sociology}, 105(2):493--527, 1999.
+
+\end{thebibliography}

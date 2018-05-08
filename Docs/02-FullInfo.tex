@@ -22,7 +22,7 @@ Therefore, the expectation is given by
 \begin{eqnarray*}
 \Ex\{ \pi_i(r(1-\epsilon_i))\}&=&\begin{cases}
 0&1-\frac{\lambda}{r}\leq 0\\
-a_0-a_1r(1-\Ex\{\epsilon\})&\frac{1}{S_i(p)\cdot b}\left(1-\frac{\lambda}{r}\right)\geq 1\\
+a_0-a_1r(1-\Ex\{\epsilon_i\})&\frac{1}{S_i(p)\cdot b}\left(1-\frac{\lambda}{r}\right)\geq 1\\
 \frac{1}{(S_i(p)\cdot b)^2}\left(1-\frac{\lambda}{r}\right)^2\left(a_0-a_1r\left(1-\frac{1}{2}\left(1-\frac{\lambda}{r}\right)\right)\right)\,&{\rm o.w.}
 \end{cases}
 \end{eqnarray*}
@@ -64,13 +64,13 @@ The function $\Ex_p\{ \pi_i(r(1-\epsilon_i))\}$ is depicted in Figure~(\ref{figE
 Finally, the optimal expected utility is given by
 \begin{equation}\label{eqEPOpt}
 \Ex_p\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}=\begin{cases}
-a_0-a_1x_i(1-\bar\epsilon)&\lambda_i\leq x_i\leq r^u\\
-a_0-a_1\lambda_i(1-\bar\epsilon)&0\leq x_i\leq \lambda_i\\
+a_0-a_1x_i(1-S_i(p)\bar\epsilon)&\lambda_i\leq x_i\leq r^u\\
+a_0-a_1\lambda_i(1-S_i(p)\bar\epsilon)&0\leq x_i\leq \lambda_i\\
 0&{\rm ow}
 \end{cases}
 \end{equation}
 and it's depicted on Figure~(\ref{figOpExUt}).  It's safe to assume that the utility parameters $a_0,\,a_1$ are such that $r^u\geq 1$, and, therefore, we can dismiss the case of $r_i\geq r^u$ \jd{more on this}.  Then, the optimal policy, and optimal expected utility can be written as
-\[r_i^*(x_i)=\max\{\lambda_i(p),x_i\},\quad \Ex_p\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}=a_0-a_1\max\{\lambda_i(p),x_i\}(1-\bar{\epsilon}).\]
+\[r_i^*(x_i)=\max\{\lambda_i(p),x_i\},\quad \Ex_p\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}=a_0-a_1\max\{\lambda_i(p),x_i\}(1-S_i(p)\bar{\epsilon}).\]
 
 \jd{comment of autoregulation on the agent's strategy.  Add the impossibility of distress. }
 
@@ -106,14 +106,31 @@ The solution to these two optimization problems are given by:
 \subsubsection{Risk-averse Central Planner (RACP) $(\theta>0,\gamma=0)$}
 Given a parameter of risk aversion $\theta>0$, the central planner solves the following problem
 \begin{equation}\label{eq:racp}
-x^*\in\argmax_{x} \Lset \Ex_{\bar p}\left(\sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\right) - \frac{\theta}{2}\var_{\bar p} \left(\sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\right)\Rset.
+x^*\in\argmax_{x}  f_{\theta,0}(x)=\Ex_{\bar p}\left(\sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\right) - \frac{\theta}{2}\var_{\bar p} \left(\sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\right).
 \end{equation}
-In order to analyze this optimization problem, we need to compute the pairwise covariances. 
-
-%\begin{eqnarray*}
-%\var_{\bar p}\left(\sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\right)&=&\sum_i \var(\pi_i(r^*_i(x_i)(1-\epsilon_i))+2\sum_{j<i}\cov(\pi_i(r^*_i(x_i)(1-\epsilon_i)),\pi_j(r^*_j(x_j)(1-\epsilon_j))\\
-%\end{eqnarray*}
-%and the formula for the variance can be obtained using Equations~(\ref{indvar},\ref{eqcovij}), and it is given by
+In order to analyze this optimization problem, the risk-aversion term coming from the variance is written as 
+\[\var_{\bar p}\left(\sum_{i=1}^N \pi_i(r^*_i(x_i)(1-\epsilon_i))\right)=\sum_{i=1}^N \var_{\bar p}(\pi_i(r^*_i(x_i)(1-\epsilon_i)))+2\sum_{j<i}\cov_{\bar p}(\pi_i(r^*_i(x_i)(1-\epsilon_i)),\pi_j(r^*_j(x_j)(1-\epsilon_j))).\]
+Thus, the first computations needed are pairwise covariances.  Thus,
+\begin{eqnarray*}
+\cov_{\bar p}(\pi_i(r^*_i(x_i)(1-\epsilon_i)),\pi_j(r^*_j(x_j)(1-\epsilon_j)))&=&\Ex\Lset\left(a_0-a_1\max\{\lambda_i(\bar{p}),x_i\}(1-\epsilon_i)-a_0+a_1\max\{\lambda_i(\bar{p}),x_i\}(1-\bar{\epsilon_i})\right)\\
+&&\quad\cdot\left(a_0-a_1\max\{\lambda_j(\bar{p}),x_j\}(1-\epsilon_j)-a_0+a_1\max\{\lambda_j(\bar{p}),x_j\}(1-\bar{\epsilon_j})\right)\Rset\\
+&=&a_1^2\,S_i(\bar{p})\,S_j(\bar{p})\,\max\{\lambda_i(\bar{p}),x_i\}\,\max\{\lambda_j(\bar{p}),x_j\}\,\Ex\lset (\epsilon-\bar{\epsilon})^2\}\\
+&=&a_1^2\,S_i(\bar{p})\,S_j(\bar{p})\,\max\{\lambda_i(\bar{p}),x_i\}\,\max\{\lambda_j(\bar{p}),x_j\}\,\frac{b^ 2}{12}
+\end{eqnarray*}
+Therefore, the objective function in Equation~(\ref{eq:racp}) is given by
+\[f_{\theta,0}(x)=\sum_{i=1}^N a_0-a_1\max\{\lambda_i(\bar{p}),x_i\}(1-S_i(\bar{p})\bar{\epsilon})-\frac{\theta}{2}\frac{(a_1\,b)^2}{12}\sum_{i=1}^N\sum_{j=1}^N S_i(\bar{p})\,S_j(\bar{p})\,\max\{\lambda_i(\bar{p}),x_i\}\,\max\{\lambda_j(\bar{p}),x_j\}.\]
+From this expression, it's easy to see that the the maximum of $f_{\theta,0}$ coincide with the maximum of $f_{0,0}$, as both terms are constant on the area $\{x:0\leq x_i\leq \lambda_i(\bar{p})\}$, and are decreasing outside this region.  Thus, the central planner solution for both problems, Individual and Global policy, are given by Equation~(\ref{eq:solrncpi}) and Equation~(\ref{eq:solrncpu}) respectively.
 
 
 \subsubsection{Ambiguity-averse Central Planner (AACP) $(\theta>0,\gamma>0)$}
+Consider the case where the Central Planner faces ambiguity with respect to the parameter $p$.  In this case, for $\theta>0$ and $\gamma>0$, the optimization problem is given by
+\begin{equation}\label{eq:aacp}
+x^*\in\argmax_{x}  f_{\theta,\gamma}(x)= f_{\theta,0}(x) - \frac{\gamma}{2}\var_{\alpha} \left(\sum_{i=1}^N \Ex_{\bf p}\{\pi_i(r^*_i(x_i)(1-\epsilon_i))\}\right).
+\end{equation}
+We follow the same strategy to compute the ambiguity term, i.e., by computing the individual covariances.  These terms are given by 
+\begin{eqnarray*}
+\cov_\alpha\left(\Ex_{\bf p}\pi_i(x_i),\Ex_{\bf p}\pi_j(x_j)\right)&=&a_1^2\sum_{k=1}^K \alpha_k \left(\max\{x_i,\lambda_i(p_k)\}(1-S_i(p_k)\bar{\epsilon}) - \max\{x_i,\lambda_i(\bar{p})\}(1-S_i(\bar{p})\bar{\epsilon}) \right)\\
+&&\quad\quad\cdot\left(\max\{x_j,\lambda_j(p_k)\}(1-S_j(p_k)\bar{\epsilon}) - \max\{x_j,\lambda_j(\bar{p})\}(1-S_j(\bar{p})\bar{\epsilon}) \right)\\
+%&=&a_1^2\sum_{k}\alpha_k \left(\max\{x_i(1-S_i(p_k)\Ex\epsilon),\lambda\} - \max\{x_i(1-S_i(p_0)\Ex\epsilon),\lambda\} \right)\\
+%&&\quad\quad\cdot\left(\max\{x_j(1-S_j(p_k)\Ex\epsilon),\lambda\} - \max\{x_j(1-S_j(p_0)\Ex\epsilon),\lambda\} \right)
+\end{eqnarray*} 
