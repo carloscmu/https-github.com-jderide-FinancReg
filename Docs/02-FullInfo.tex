@@ -1,4 +1,4 @@
-\section{Full information model}
+\section{Full information model}\label{sec:fullinfo}
 Consider an economy consisting on financial institutions that hold obligations between them.  This economy is represented using a network, where each institution is represented by a node, and the corresponding obligations are represented by arcs.  Denote by $\cN=\{1,\ldots,N\}$ the set of financial institutions, and $\cA=\{e_{ij}:i,j\in\cN\}$ the set of financial obligations.  Each financial institution $i$ is concerned about their profit maximization,  by deciding an optimal level of a liquidity index \jd{A/L?, explain this}, denoted by $r_i$.
 
 This economy faces an liquidity shock that propagates through the network, and it is modeled as a random variable $\epsilon_0\sim{\rm U}(0,b)$.  By simplicity, let's assume that this shock affects initially institution $i$ with probability $q_i$, or it affect any other institution in the network, but it propagates by a fraction $p$ of the shock to its neighbors.  Thus, the corresponding shock that institution $i$ faces, comes either from the idiosyncratic shock, or through its neighbors (or any simple-connected neighbor in the network).  Let $A$ be the adjencency matrix, i.e. $A_{i,j} = \begin{cases} 1 & (i,j)\in\cA\\ 0 &o.w.\end{cases}$, and let $\epsilon=(\epsilon_1,\ldots,\epsilon_N)$ be the vector of expected shocks.  The shock vector satisfies
@@ -122,19 +122,17 @@ Therefore, the objective function in Equation~(\ref{eq:racp}) is given by
 From this expression, it's easy to see that the the maximum of $f_{\theta,0}$ coincide with the maximum of $f_{0,0}$, as both terms are constant on the area $\{x:0\leq x_i\leq \lambda_i(\bar{p})\}$, and are decreasing outside this region.  Thus, the central planner solution for both problems, Individual and Global policy, are given by Equation~(\ref{eq:solrncpi}) and Equation~(\ref{eq:solrncpu}) respectively.
 
 
-\subsubsection{Ambiguity-averse Central Planner (AACP) $(\theta>0,\gamma>0)$}
+\subsubsection{Ambiguity-averse Central Planner (AACP) $(\theta>0,\gamma=0)$}
 Consider the case where the Central Planner faces ambiguity with respect to the parameter $p$.  In this case, for $\theta>0$ and $\gamma>0$, the optimization problem is given by
 \begin{equation}\label{eq:aacp}
-x^*\in\argmax_{x}  f_{\theta,\gamma}(x)= f_{\theta,0}(x) - \frac{\gamma}{2}\var_{\alpha} \left(\sum_{i=1}^N \Ex_{\bf p}\{\pi_i(r^*_i(x_i)(1-\epsilon_i))\}\right).
+x^*\in\argmax_{x}  f_{0,\gamma}(x)= f_{0,0}(x) - \frac{\gamma}{2}\var_{\alpha} \left(\sum_{i=1}^N \Ex_{\bf p}\{\pi_i(r^*_i(x_i)(1-\epsilon_i))\}\right).
 \end{equation}
 We follow the same strategy to compute the ambiguity term, i.e., by computing the individual covariances.  These terms are given by 
 \begin{eqnarray*}
 \cov_\alpha\left(\Ex_{\bf p}\pi_i(x_i),\Ex_{\bf p}\pi_j(x_j)\right)&=&a_1^2\sum_{k=1}^K \alpha_k \left(\max\{x_i,\lambda_i(p_k)\}(1-S_i(p_k)\bar{\epsilon}) - \max\{x_i,\lambda_i(\bar{p})\}(1-S_i(\bar{p})\bar{\epsilon}) \right)\\
-&&\quad\quad\cdot\left(\max\{x_j,\lambda_j(p_k)\}(1-S_j(p_k)\bar{\epsilon}) - \max\{x_j,\lambda_j(\bar{p})\}(1-S_j(\bar{p})\bar{\epsilon}) \right)\\
-%&=&a_1^2\sum_{k}\alpha_k \left(\max\{x_i(1-S_i(p_k)\Ex\epsilon),\lambda\} - \max\{x_i(1-S_i(p_0)\Ex\epsilon),\lambda\} \right)\\
-%&&\quad\quad\cdot\left(\max\{x_j(1-S_j(p_k)\Ex\epsilon),\lambda\} - \max\{x_j(1-S_j(p_0)\Ex\epsilon),\lambda\} \right)
+&&\quad\quad\quad\quad\cdot\left(\max\{x_j,\lambda_j(p_k)\}(1-S_j(p_k)\bar{\epsilon}) - \max\{x_j,\lambda_j(\bar{p})\}(1-S_j(\bar{p})\bar{\epsilon}) \right)
 \end{eqnarray*} 
-\jd{Not sure what are we going to say here. We can say that this function is nonlinear, nonconcave, and we can use a global optimization solver to find the minimum}
+The final form of the objective function will include a series of variance and covariance terms that decompose into piecewise linear/quadratic functions.  Thus, the central planner problem belongs to the family of nonlinear, non-concave problems, and it can be solved by using state-of-the-art global optimization solver to find the optimal value.  In the next section we explore numerical solutions to this problem for a series of financial networks.
 
 \subsection{Examples}
 \subsubsection{Toy example}
