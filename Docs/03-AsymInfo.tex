@@ -12,7 +12,9 @@ We analyze the regulation problem following the procedure described in Section~(
 
 For a given exposure matrix $E$, the agent profit maximization problem is given by finding an optimal capital index that maximizes the expected utility function, as given in Equation~(\ref{imax}).  Note that in this formulation, the shock that agent \(i\) faces comes from Equation~(\ref{eq:epspriv}).  The agent-\(i\) solution is given by
 
-\[\lambda_i(E)= \frac{1}{1-S_i(E)b}\lambda,\quad r_i^*(x_i) = \max\{\lambda_i(E),x_i\},\quad \Ex_E\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}=a_0-a_1r_i^*(x_i)(1-S_i(E)\bar\epsilon)\]
+\begin{equation}\label{eq:privsol}
+\lambda_i(E)= \frac{1}{1-S_i(E)b}\lambda,\quad r_i^*(x_i) = \max\{\lambda_i(E),x_i\},\quad \Ex_E\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}=a_0-a_1r_i^*(x_i)(1-S_i(E)\bar\epsilon)
+\end{equation}
 
 Discrepancies between the previous case only comes from the differences in the computation of the shock propagation factor \(S\), but the final form of the reaction function and the expected utility remains the same.  In the next subsection, more drastic changes are presented on the regulator problem.
 
@@ -25,6 +27,20 @@ This factor $S^{CP}_i$ is the updated exposure factor that incorporates network 
 \[\lambda_i^{CP}(E)= \frac{1}{1-S_i^{CP}(E)b}\lambda.\]
 From here, it is easy to see that the critical lambda that the central planner assigns 
 
+\subsubsection{Risk-neutral Central planner \(\theta=0,\,\gamma=0\)}
+The maximization of the joint utility functions under a neutral risk attitude combined with the different information sets, is described by the following optimization 
+\[x=(x_1,\ldots,x_N)\in\argmax_{x} \sum_{i=1}^N \Ex^{CP}\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\},\]
+where \(r_i^*(x_i)\) is the reaction function of each agent to the policy \(x_i\) (given by Eq.~(\ref{eq:privsol})), and \(\epsilon_i\) is given by Equation~(\ref{eq:cpasy}).  Especial attention is needed when computing the expectation, as the central planner forecasts an amplified shock, compare to the shocks that agents are expecting.  Therefore, the \(i\)-agent expected utility computed by the central planner is given by
+\begin{eqnarray*}
+\Ex^{CP}\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}&=&\Ex\{\pi_i(\max\{\lambda_i,x_i\}(1-S_i^{CP}\epsilon_0))\}\\
+&=&\Ex\{\Ex\{\pi_i(\max\{\lambda_i,x_i\}(1-S_i^{CP}\epsilon_0))|\max\{\lambda_i,x_i\}(1-S_i^{CP}\epsilon_0)>\lambda\}\}\\
+&=&\left(\frac{1}{bS_i^{CP}(E)}\left(1-\frac{\lambda}{r^*_i(x_i)}\right)\right)^2 \left(a_0-a_1\left(\frac{r_i^*(x_i)+\lambda}{2}\right)\right)
+\end{eqnarray*}
+
+  
+\subsubsection{Risk-averse Central planner \(\theta>0,\,\gamma=0\)}
+
+\subsubsection{Ambiguity-averse Central Planner \(\theta=0,\,\gamma>0\)}
 Consider a central planner that , that faces ambiguity with respect to the exposure matrix that describes the network structure of the market.  Thus, the matrix \(E\) becomes a random variable taking values on the set of possible outcomes \(\{E_1,\ldots,E_L\}\), and \(\{\alpha_1,\ldots,\alpha_K\}\) are the corresponding associated probabilities.
 
 
