@@ -1,4 +1,30 @@
 \section{Network information asymmetries}
-In this section we study the frictions induced in the regulation by information asymmetries with respect to the structure of the financial network.   In this setting, each firm only has partial information about the network.  Moreover, firm $i$ only \emph{knows} \jd{defn need a better verb} its obligations only with its immediate neighbors and, therefore, the optimal capital strategy only foresees capital shocks either idiosyncratic or through one of the directed connected institution.
+In this section we study the frictions induced in the regulation by information asymmetries with respect to the structure of the financial network.   In this setting, each firm only has partial information about the network.  Moreover, firm $i$ only \emph{knows} \jd{defn need a better verb} its obligations with its immediate neighbors and, therefore, the optimal capital strategy only foresees capital shocks either idiosyncratic or through one of the direct connected institution.
 
-We extend our model from Section~(\ref{sec:fullinfo}), by replacing the adjancency matrix $A$ and the propagation parameter $p$ with a new matrix, $E$, which represents the \emph{exposure} of each firm with respect to its neighbors.  Thus, $E=(e_{ij})$, where $e_{ij}$ is the level of exposure of firm $i$ with respect to firm $j$ and, in case that firm $j$ receives a shock of $\epsilon$, then the contagion to firm $i$ is $e_{ij}\epsilon$.
+We extend our model from Section~(\ref{sec:fullinfo}), by replacing the adjacency matrix $A$ along with the propagation parameter $p$, with a new matrix, $E$, which represents the \emph{exposure} of each firm with respect to its neighbors, which captures adjacency and magnitude of shock propagation.  Thus, $E=(e_{ij})$, where $e_{ij}$ is the level of exposure of firm $i$ with respect to firm $j$ and, in case that firm $j$ receives a shock of $\epsilon$, then the fraction of contagion to firm $i$ is \(e_{ij}\epsilon\).  Therefore, the computation for the corresponding shock that each institution faces is given by
+\begin{equation}\label{eq:epspriv}
+\epsilon_i = S_i(E_{i\cdot})\epsilon_0,\quad S_i(E_{i\cdot})=(1+E')_{i\cdot}\,q=q_i+ \sum_{j\neq i} e_{ji}q_j,
+\end{equation}
+Note that for the computation of agent-\(i\) shock, we only require knowledge of the \(i\)-th column of the matrix $E$, i.e., only the propagation factor of the immediate neighbors of \(i\).\jd{only the incidental arrows of the directed graph}
+
+\subsection{Individual optimal strategies}
+We analyze the regulation problem following the procedure described in Section~(\ref{sec:fullinfo}).  The computations are mostly similar, but one needs to focus on the differences between the agents' problems, and the central planner problem with respect to the information available to each market participant.
+
+For a given exposure matrix $E$, the agent profit maximization problem is given by finding an optimal capital index that maximizes the expected utility function, as given in Equation~(\ref{imax}).  Note that in this formulation, the shock that agent \(i\) faces comes from Equation~(\ref{eq:epspriv}).  The agent-\(i\) solution is given by
+
+\[\lambda_i(E)= \frac{1}{1-S_i(E)b}\lambda,\quad r_i^*(x_i) = \max\{\lambda_i(E),x_i\},\quad \Ex_E\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}=a_0-a_1r_i^*(x_i)(1-S_i(E)\bar\epsilon)\]
+
+Discrepancies between the previous case only comes from the differences in the computation of the shock propagation factor \(S\), but the final form of the reaction function and the expected utility remains the same.  In the next subsection, more drastic changes are presented on the regulator problem.
+
+\subsection{Central planner with full network information}
+Following the same approach as in \S~(\ref{ssec:CP}), the central planner maximizes the sum of the expected utility of each agent, given by the function~(\ref{objcp}), by imposing a minimum capital requirement for each institution. Compared to the previously exposed approach, a fundamental difference arises: the network information available for the policy maker.  Here, for a given exposure matrix \(E\), the entire network structure enters to the shock propagation computation, that takes the following form
+\begin{equation}\label{eq:cpasy}
+\epsilon = S^{CP}(E)\epsilon_0,\quad S^{CP}(E)=\left(I+\sum_{k=1}^{N-1}\tilde{E}_k\right)\,q,\quad \tilde{E}_0=E',\,\tilde{E}_k=E'\tilde{E}_{k-1}-{\rm diag}(E'\tilde{E}_{k-1})
+\end{equation}
+This factor $S^{CP}_i$ is the updated exposure factor that incorporates network propagation of the idiosyncratic shock, and it is easy to see that $S^{CP}_i(E)\geq S_i(E)$, as the later only includes the first order term on the sum in Equation~(\ref{eq:cpasy}).  This observation leads to discrepancies in the expected critical capital requirement $\lambda_i(E)$, which will have the following form from the central planner perspective
+\[\lambda_i^{CP}(E)= \frac{1}{1-S_i^{CP}(E)b}\lambda.\]
+From here, it is easy to see that the critical lambda that the central planner assigns 
+
+Consider a central planner that , that faces ambiguity with respect to the exposure matrix that describes the network structure of the market.  Thus, the matrix \(E\) becomes a random variable taking values on the set of possible outcomes \(\{E_1,\ldots,E_L\}\), and \(\{\alpha_1,\ldots,\alpha_K\}\) are the corresponding associated probabilities.
+
+

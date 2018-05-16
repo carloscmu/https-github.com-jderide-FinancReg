@@ -74,7 +74,7 @@ and it's depicted on Figure~(\ref{figOpExUt}).  It's safe to assume that the uti
 
 \jd{comment of autoregulation on the agent's strategy.  Add the impossibility of distress. }
 
-\subsection{Central Planner \jd{regulator?} Problem}
+\subsection{Central Planner \jd{regulator?} Problem}\label{ssec:CP}
 In this section we study the problem of a benevolent \jd{por supuesto!} central problem, whose main problem is to guarantee the stability of the financial network under capital shocks. The mechanism available for the Central Planner, is the minimum capital index required for each institution, i.e., this agent decides $x=(x_1,\ldots,x_N)$.  The central planner faces the problem of guaranteeing financial stability, as long as maximizing each institution's utility.  In this setting, we introduce ambiguity on the propagation parameters, i.e., the central planner has partial knowledge on the parameter $p$, that is modeled as a random variable with possible outcomes $\{p_1,\ldots,p_K\}$, with associated probabilities $\alpha_i=\Pro\{p=p_i\}$.  Denoting $\bar{p}=\Ex\{p\}$, we consider three possible objective functions, describing the goal of the central planner, based on the approach presented on \cite{Mac13alpha}
 \begin{equation}\label{objcp}
 f_{\theta,\gamma}(x)= \Ex_{\bar p}\Lset\sum_{i=1}^N \pi_i(r_i^*(x_i)(1-\epsilon_i))\Rset-\frac{\theta}{2}\var_{\bar p}\left(\sum_{i=1}^N\pi_i(r_i^*(x_i)(1-\epsilon_i))\right)-\frac{\gamma}{2}\var_\alpha\left(\sum_{i=1}^N\Ex_{p_i}\{\pi_i(r_i^*(x_i)(1-\epsilon_i))\}\right)
@@ -122,7 +122,7 @@ Therefore, the objective function in Equation~(\ref{eq:racp}) is given by
 From this expression, it's easy to see that the the maximum of $f_{\theta,0}$ coincide with the maximum of $f_{0,0}$, as both terms are constant on the area $\{x:0\leq x_i\leq \lambda_i(\bar{p})\}$, and are decreasing outside this region.  Thus, the central planner solution for both problems, Individual and Global policy, are given by Equation~(\ref{eq:solrncpi}) and Equation~(\ref{eq:solrncpu}) respectively.
 
 
-\subsubsection{Ambiguity-averse Central Planner (AACP) $(\theta>0,\gamma=0)$}
+\subsubsection{Ambiguity-averse Central Planner (AACP) $(\theta=0,\gamma>0)$}
 Consider the case where the Central Planner faces ambiguity with respect to the parameter $p$.  In this case, for $\theta>0$ and $\gamma>0$, the optimization problem is given by
 \begin{equation}\label{eq:aacp}
 x^*\in\argmax_{x}  f_{0,\gamma}(x)= f_{0,0}(x) - \frac{\gamma}{2}\var_{\alpha} \left(\sum_{i=1}^N \Ex_{\bf p}\{\pi_i(r^*_i(x_i)(1-\epsilon_i))\}\right).

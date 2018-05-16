@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  9 MAY 2018 12:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  16 MAY 2018 14:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -538,15 +538,15 @@ LaTeX Font Info:    Font shape `OT1/iwonal/bx/n' in size <8> not available
 LaTeX Font Info:    Font shape `OT1/iwonal/bx/n' in size <6> not available
 (Font)              Font shape `OT1/iwonal/b/n' tried instead on input line 128
 .
-) (./03-AsymInfo.tex) (./04-GenEx.tex [5]) (./DR-Model.bbl)
+) (./03-AsymInfo.tex [5]) (./04-GenEx.tex [6]) (./DR-Model.bbl)
 
 AED: lastpage setting LastPage
-[6] (./DR-Model.aux) ) 
+[7] (./DR-Model.aux) ) 
 Here is how much of TeX's memory you used:
- 5212 strings out of 492995
- 75215 string characters out of 6132704
- 178518 words of memory out of 5000000
- 8606 multiletter control sequences out of 15000+600000
+ 5216 strings out of 492995
+ 75261 string characters out of 6132704
+ 179546 words of memory out of 5000000
+ 8610 multiletter control sequences out of 15000+600000
  69756 words of font info for 65 fonts, out of 8000000 for 9000
  1146 hyphenation exceptions out of 8191
  48i,15n,53p,975b,306s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -572,10 +572,10 @@ t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2017/texmf-dist
 /fonts/type1/nowacki/iwona/iwonal.pfb></usr/local/texlive/2017/texmf-dist/fonts
 /type1/nowacki/iwona/iwonali.pfb></usr/local/texlive/2017/texmf-dist/fonts/type
 1/nowacki/iwona/iwonam.pfb>
-Output written on DR-Model.pdf (6 pages, 226288 bytes).
+Output written on DR-Model.pdf (7 pages, 231078 bytes).
 PDF statistics:
- 147 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
+ 152 PDF objects out of 1000 (max. 8388607)
+ 118 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
