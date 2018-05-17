@@ -83,7 +83,7 @@ for k in Scn:
             xx[i][l] = epi_cp(tt[l],S_cp[k][i],lopt[k][i])
             sumep[l] += xx[i][l]
         plt.plot(tt, xx[i])
-plt.plot(tt, sumep)
+#plt.plot(tt, sumep)
 plt.xlabel(r'Policy level')
 plt.ylabel(r'$\mathbf{E}_{CP}$')
 plt.title(r'Expected utility function for each agent')
