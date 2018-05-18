@@ -6,13 +6,13 @@ from matplotlib import rc
 plt.rc('text', usetex=True)
 ext = 'pdf'
 
-bdlo = 0.005
-bdup = 1.0
+bdlo = 0.05
+bdup = 0.07
 lbda = 0.05
 
 
 Nodes = set([0,1,2])
-Arcs = set([(1,0),(1,2),(0,2)])
+Arcs = set([(1,0),(0,1),(1,2),(2,0)])
 Scn = set([0])
 alpha = {}
 for k in Scn:
@@ -25,8 +25,8 @@ E = {}
 for k in Scn:
     E[k] = {}
     for i,j in Arcs:
-        E[k][i,j] = 0.5
-
+        E[k][i,j] = 0.25 + 0.5*np.random.rand()
+print(E)
 a0 = 1.0
 a1 = 1.0
 b = 0.25
@@ -45,7 +45,7 @@ for k in Scn:
         Saux[k] += np.matmul(Eaux[k],Saux[k])
         for i in range(0,npts):
             Saux[k][i,i] = 0.0
-print(Saux)
+#print(Saux)
 lopt = {}
 lopt_cp = {}
 S = {}
@@ -66,27 +66,40 @@ for k in Scn:
         lopt[k][n] = lbda/(1.0-S[k][n]*b)
         lopt_cp[k][n] = lbda/(1.0-S_cp[k][n]*b)
 ru = a0/(a1*(1.0-exe))
+print(lopt)
+print(lopt_cp)
 
-def epi_cp(x,S,li):
-    ep0 = (1.0/b*S)*(1.0-lbda/(max(x,li)))
-    ep1 = a0-a1*((max(x,li)+lbda)/2.0)
-    return ep1*(ep0**2)
+def epi_cp(x,S,li,lcp):
+    if max(x,li)<lcp:
+        ep0 = (1.0/b*S)*(1.0-lbda/(max(x,li)))
+        ep1 = a0-a1*((max(x,li)+lbda)/2.0)
+        return ep1*(ep0**2)
+    else:
+        return a0-a1*max(x,li)*(1-S*exe)
 
+colrs = {0:'b',1:'r',2:'g'}
 NN = 1000
+tt = np.linspace(bdlo,bdup,NN)
+xx = {}
+sumep = {}
 for k in Scn:
-    tt = np.linspace(bdlo,bdup,NN)
-    xx = {}
-    sumep = tt*0.0
+    plt.figure(k)
+    xx[k] = {}
+    sumep[k] = tt*0.0
     for i in Nodes:
-        xx[i] = tt*0.0
+        xx[k][i] = tt*0.0
         for l in range(NN):
-            xx[i][l] = epi_cp(tt[l],S_cp[k][i],lopt[k][i])
-            sumep[l] += xx[i][l]
-        plt.plot(tt, xx[i])
-#plt.plot(tt, sumep)
-plt.xlabel(r'Policy level')
-plt.ylabel(r'$\mathbf{E}_{CP}$')
-plt.title(r'Expected utility function for each agent')
-plt.grid(True)
-plt.savefig('ExpUtCP.'+ext)
-plt.show()
+            xx[k][i][l] = epi_cp(tt[l],S_cp[k][i],lopt[k][i],lopt_cp[k][i])
+            sumep[k][l] += xx[k][i][l]
+        plt.plot(tt, xx[k][i],label=str(i),color=colrs[i])
+        plt.axvline(x=lopt[k][i],linestyle='--',linewidth=0.8,color=colrs[i])
+        plt.axvline(x=lopt_cp[k][i],color=colrs[i])
+#    plt.plot(tt, sumep)
+#    plt.ylim(0.0,1.0)
+    plt.xlabel(r'Policy level')
+    plt.ylabel(r'$\mathbf{E}_{CP}$')
+    plt.legend(loc='lower right')
+    plt.title(r'Expected utility function for each agent')
+    plt.grid(True)
+    plt.savefig('ExpUtCP.'+ext)
+    plt.show()
